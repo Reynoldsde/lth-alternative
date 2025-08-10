@@ -832,7 +832,17 @@
             100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); }
         }
         
-        /* Responsive Design */
+        /* Enhanced Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -842,18 +852,54 @@
                 display: block;
             }
             
+            .hero {
+                padding: 2rem 0;
+                min-height: 90vh;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem !important;
+                line-height: 1.1;
+                margin-bottom: 1rem;
+            }
+            
+            .hero p {
+                font-size: 1rem !important;
+                margin-bottom: 1.5rem;
+            }
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 0.75rem;
             }
             
             .btn {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
+                padding: 0.875rem 1.5rem;
+                min-height: 44px;
             }
             
             .section {
                 padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem !important;
+            }
+            
+            .section-header {
+                margin-bottom: 2.5rem;
             }
             
             .container {
@@ -861,11 +907,116 @@
             }
             
             .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+                margin: 1.5rem 0;
+            }
+            
+            .stat-card {
+                padding: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .logo-img {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            
+            .about-image {
+                height: 300px;
+                margin-bottom: 2rem;
+            }
+            
+            .methodology-step {
+                text-align: center;
+            }
+            
+            .testimonial-card {
+                margin-bottom: 1rem;
             }
         }
         
         @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.1;
+            }
+            
+            .hero p {
+                font-size: 0.9rem !important;
+            }
+            
+            .hero-content {
+                padding: 0.5rem;
+            }
+            
+            .section {
+                padding: 2.5rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.6rem !important;
+            }
+            
+            .container {
+                padding: 0 0.75rem;
+            }
+            
+            .btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+            
+            .card {
+                padding: 1.25rem;
+            }
+            
+            .stat-number {
+                font-size: 1.25rem;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1rem;
+            }
+            
+            .logo-text p {
+                font-size: 0.7rem;
+            }
+            
+            .nav-container {
+                padding: 0.75rem 0;
+            }
+            
             .hero-stats {
                 grid-template-columns: 1fr;
             }
@@ -876,6 +1027,39 @@
                 width: 3.5rem;
                 height: 3.5rem;
                 font-size: 1.3rem;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .btn {
+                min-height: 44px;
+                padding: 0.875rem 1.5rem;
+            }
+            
+            .nav-menu a {
+                padding: 0.5rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+            
+            .mobile-menu a {
+                padding: 1rem;
+                min-height: 44px;
+            }
+            
+            .card:hover {
+                transform: none;
+                box-shadow: var(--shadow-card);
+            }
+            
+            .btn:hover {
+                transform: none;
+            }
+            
+            .stat-card:hover {
+                transform: none;
             }
         }
         
@@ -992,25 +1176,25 @@
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content animate-on-scroll">
-                <h1>Empowering Futures Through <span class="gradient-text">Practical Education</span></h1>
-                <p>At Loyal Training Hub, we provide cutting-edge, hands-on training in IT and Languages, equipping you with the skills to thrive in today's dynamic world.</p>
+                <h1>Unlock Your Professional and Academic Potential with <span class="gradient-text">Loyal Training Hub</span></h1>
+                <p>At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more.</p>
                 
                 <div class="hero-stats">
                     <div class="stat-card">
-                        <span class="stat-number">1000+</span>
-                        <span class="stat-label">Students Trained</span>
+                        <span class="stat-number">2500+</span>
+                        <span class="stat-label">Learners Empowered</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">15+</span>
-                        <span class="stat-label">Courses Available</span>
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">Certified Trainers</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">6</span>
-                        <span class="stat-label">Languages Taught</span>
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Skill Improvement</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">Support Available</span>
+                        <span class="stat-number">20+</span>
+                        <span class="stat-label">Corporate Partners</span>
                     </div>
                 </div>
                 
@@ -1037,33 +1221,54 @@
                     </div>
                     
                     <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
-                        Loyal Training Hub Ltd is a leading educational institution dedicated to fostering talent and driving career growth in Rwanda and beyond. Our mission is to bridge the gap between academic knowledge and industry demands by offering practical, skill-focused training programs.
+                        At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more, empowering you to communicate with confidence and fluency.
                     </p>
                     
                     <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
-                        We believe in a hands-on approach, providing our students with real-world projects, expert mentorship, and a vibrant learning community. Our state-of-the-art facilities and experienced instructors ensure a high-quality learning experience that translates directly into professional success.
+                        At Loyal Training Hub, we believe that practical, hands-on learning experiences are the most effective way to develop professional skills. Our training programs combine theoretical knowledge with real-world applications, ensuring that you're not just learning concepts, but developing the ability to apply them in your career.
                     </p>
                     
                     <div class="grid" style="gap: 1rem;">
                         <div class="feature-card">
-                            <div class="feature-icon">✅</div>
+                            <div class="feature-icon">📅</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Industry-relevant curriculum</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Our courses are designed with industry professionals to ensure relevance</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Flexible Schedules</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Learn at your own pace with our flexible scheduling options</p>
                             </div>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon">👥</div>
+                            <div class="feature-icon">👨‍🏫</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Experienced and passionate instructors</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Learn from experts with real-world experience and proven track records</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Experienced Trainers</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Learn from instructors with real-world expertise in their fields</p>
                             </div>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon">🏆</div>
+                            <div class="feature-icon">💻</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Strong career support and networking</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Comprehensive support system to help you succeed in your career journey</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Modern Learning</h3>
+                                <p style="color: hsl(var(--muted-foreground));">State-of-the-art facilities and contemporary teaching methods</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💰</div>
+                            <div>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Affordable Pricing</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Competitive rates with flexible installment payment plans</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚀</div>
+                            <div>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">No Fixed Intakes</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Start immediately after your placement test - no waiting periods</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">✨</div>
+                            <div>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Proven Impact</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Over 2,500 learners empowered both locally and internationally</p>
                             </div>
                         </div>
                     </div>
