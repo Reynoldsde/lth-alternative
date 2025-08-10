@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyal Training Hub - Empowering Futures Through Practical Education</title>
+    <meta name="description" content="Leading educational institution in Rwanda offering IT and Language training programs. Master new skills with expert instructors and hands-on learning.">
+    <meta name="keywords" content="education, training, IT courses, language learning, Rwanda, programming, web development, data science">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Loyal Training Hub - Empowering Futures Through Practical Education">
+    <meta property="og:description" content="Leading educational institution in Rwanda offering IT and Language training programs">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://i.imgur.com/uLLa9dm.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Loyal Training Hub - Empowering Futures Through Practical Education">
+    <meta name="twitter:description" content="Leading educational institution in Rwanda offering IT and Language training programs">
+    
+    <link rel="canonical" href="https://lth-school-4dii.vercel.app">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Color System */
+            --primary: 214 100% 47%;
+            --primary-glow: 214 100% 65%;
+            --secondary: 37 90% 55%;
+            --secondary-glow: 37 90% 70%;
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --card: 0 0% 100%;
+            --border: 214.3 31.8% 91.4%;
+            
+            /* Gradients */
+            --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+            --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--muted)));
+            
+            /* Shadows */
+            --shadow-premium: 0 25px 50px -12px hsl(var(--primary) / 0.25);
+            --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+            --shadow-card: 0 10px 30px -10px hsl(var(--foreground) / 0.1);
+            
+            /* Transitions */
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--foreground));
+            background: hsl(var(--background));
+            overflow-x: hidden;
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hero);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-animation {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white/20;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+        
+        .loading-content {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .loading-dots {
+            display: inline-block;
+            animation: loading-dots 1.5s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255,255,255,0.3); }
+            50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(255,255,255,0.5); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes loading-dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
+        }
+        
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-text {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-hero);
+            color: white;
+            box-shadow: var(--shadow-premium);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: hsl(var(--secondary));
+            color: white;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .card {
+            background: var(--gradient-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+            border: 1px solid hsl(var(--border));
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-premium);
+            transform: translateY(-5px);
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid hsl(var(--border));
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-img {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .logo-text p {
+            font-size: 0.75rem;
+            color: hsl(var(--muted-foreground));
+            margin: 0;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: hsl(var(--foreground));
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: hsl(var(--primary));
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -0.25rem;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-hero);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: hsl(var(--foreground));
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid hsl(var(--border));
+            padding: 1rem;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .mobile-menu li {
+            margin: 0.5rem 0;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem;
+            text-decoration: none;
+            color: hsl(var(--foreground));
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .mobile-menu a:hover {
+            background: hsl(var(--muted));
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-hero);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="0" cy="1000" r="300"><stop offset="0" stop-color="white" stop-opacity="0.1"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="400" r="150" fill="url(%23a)"/><circle cx="400" cy="800" r="120" fill="url(%23a)"/></svg>');
+            animation: float-bg 20s ease-in-out infinite;
+        }
+        
+        @keyframes float-bg {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: hsl(var(--muted-foreground));
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .section-divider {
+            width: 5rem;
+            height: 0.25rem;
+            background: var(--gradient-hero);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        
+        /* About Section */
+        .about-image {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            height: 400px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-hero);
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            border: 1px solid hsl(var(--border));
+            transition: var(--transition-smooth);
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            background: var(--gradient-hero);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        /* Course Cards */
+        .course-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+        }
+        
+        .course-card:hover {
+            box-shadow: var(--shadow-premium);
+            transform: translateY(-5px);
+        }
+        
+        .course-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .course-card:hover .course-image img {
+            transform: scale(1.1);
+        }
+        
+        .course-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-hero);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .course-content {
+            padding: 2rem;
+        }
+        
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .course-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: hsl(var(--muted));
+            border-radius: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+        
+        .course-item:hover {
+            background: hsl(var(--primary) / 0.1);
+            transform: translateX(5px);
+        }
+        
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-premium);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            color: hsl(var(--primary) / 0.2);
+            font-family: serif;
+        }
+        
+        .testimonial-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .star {
+            color: hsl(var(--secondary));
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .author-avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+            background: white;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: var(--transition-smooth);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item:hover {
+            background: hsl(var(--muted));
+        }
+        
+        .contact-icon {
+            width: 3rem;
+            height: 3rem;
+            background: var(--gradient-hero);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            background: var(--gradient-hero);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--secondary) / 0.05));
+            border-top: 1px solid hsl(var(--border));
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: hsl(var(--foreground));
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: hsl(var(--muted-foreground));
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: hsl(var(--primary));
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid hsl(var(--border));
+            padding-top: 2rem;
+            text-align: center;
+            color: hsl(var(--muted-foreground));
+        }
+        
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 4rem;
+            height: 4rem;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+        
+        @keyframes pulse-whatsapp {
+            0% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0.1); }
+            100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-float {
+                bottom: 1rem;
+                right: 1rem;
+                width: 3.5rem;
+                height: 3.5rem;
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Video Placeholder */
+        .video-placeholder {
+            position: relative;
+            height: 300px;
+            background: var(--gradient-hero);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+        
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+        
+        .play-button {
+            width: 5rem;
+            height: 5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            transition: var(--transition-smooth);
+        }
+        
+        .video-placeholder:hover .play-button {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .video-content {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-animation">
+            <div style="font-size: 2rem;">📚</div>
+        </div>
+        <div class="loading-content">
+            Loading Loyal Training Hub<span class="loading-dots"></span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="#hero" class="logo">
+                    <img src="https://i.imgur.com/uLLa9dm.png" alt="LTH Logo" class="logo-img" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23007bff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-weight=%22bold%22>LTH</text></svg>'">
+                    <div class="logo-text">
+                        <h1 class="gradient-text">Loyal Training Hub</h1>
+                        <p>Empowering Futures</p>
+                    </div>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#unique">Our Approach</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">Get Started</a>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                
+                <div class="mobile-menu" id="mobileMenu">
+                    <ul>
+                        <li><a href="#hero" onclick="closeMobileMenu()">Home</a></li>
+                        <li><a href="#about" onclick="closeMobileMenu()">About Us</a></li>
+                        <li><a href="#unique" onclick="closeMobileMenu()">Our Approach</a></li>
+                        <li><a href="#courses" onclick="closeMobileMenu()">Courses</a></li>
+                        <li><a href="#methodology" onclick="closeMobileMenu()">Methodology</a></li>
+                        <li><a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a></li>
+                        <li><a href="#resources" onclick="closeMobileMenu()">Resources</a></li>
+                        <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+                        <li><a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">Get Started</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content animate-on-scroll">
+                <h1>Empowering Futures Through <span class="gradient-text">Practical Education</span></h1>
+                <p>At Loyal Training Hub, we provide cutting-edge, hands-on training in IT and Languages, equipping you with the skills to thrive in today's dynamic world.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Students Trained</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Courses Available</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Languages Taught</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support Available</span>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn btn-outline">📚 Explore Our Courses</a>
+                    <a href="#contact" class="btn btn-outline">👥 Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="grid grid-2" style="align-items: center;">
+                <div class="about-image animate-on-scroll">
+                    <img src="https://i.imgur.com/Ax0veGU.jpeg" alt="Loyal Training Hub Team">
+                </div>
+                
+                <div class="animate-on-scroll">
+                    <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+                        <h2 class="section-title">About <span class="gradient-text">Loyal Training Hub</span></h2>
+                        <div class="section-divider" style="margin: 1.5rem 0;"></div>
+                    </div>
+                    
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                        Loyal Training Hub Ltd is a leading educational institution dedicated to fostering talent and driving career growth in Rwanda and beyond. Our mission is to bridge the gap between academic knowledge and industry demands by offering practical, skill-focused training programs.
+                    </p>
+                    
+                    <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                        We believe in a hands-on approach, providing our students with real-world projects, expert mentorship, and a vibrant learning community. Our state-of-the-art facilities and experienced instructors ensure a high-quality learning experience that translates directly into professional success.
+                    </p>
+                    
+                    <div class="grid" style="gap: 1rem;">
+                        <div class="feature-card">
+                            <div class="feature-icon">✅</div>
+                            <div>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Industry-relevant curriculum</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Our courses are designed with industry professionals to ensure relevance</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">👥</div>
+                            <div>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Experienced and passionate instructors</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Learn from experts with real-world experience and proven track records</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🏆</div>
+                            <div>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Strong career support and networking</h3>
+                                <p style="color: hsl(var(--muted-foreground));">Comprehensive support system to help you succeed in your career journey</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unique Approach Section -->
+    <section id="unique" class="section" style="background: linear-gradient(135deg, hsl(var(--muted) / 0.3), hsl(var(--background)));">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">What Makes <span class="gradient-text">Loyal Training Hub</span> Unique?</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="grid grid-2" style="align-items: center;">
+                <div class="animate-on-scroll">
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                        At Loyal Training Hub (LTH), we believe the best learning happens through hands-on, real-world experiences. That's why we go beyond theory by integrating practical sessions and self-directed projects into every program we offer, whether it's language mastery or software training.
+                    </p>
+                    
+                    <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                        Our students don't just learn; they do. From building websites, designing digital products, and analyzing real datasets, to practicing public speaking, engaging in role plays, and preparing for international exams like IELTS, TOEFL, DELF, and TEF, everything is designed to build confidence, proficiency, and practical job skills.
+                    </p>
+                    
+                    <div class="grid grid-3" style="gap: 1.5rem;">
+                        <div class="card" style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">💰</div>
+                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;">Affordable Pricing</h3>
+                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Competitive rates with flexible installment payment plans.</p>
+                        </div>
+                        <div class="card" style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">⏰</div>
+                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;">No Fixed Intakes</h3>
+                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Start immediately after your placement test - no waiting periods.</p>
+                        </div>
+                        <div class="card" style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">🏆</div>
+                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;">Proven Impact</h3>
+                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Over 1000+ learners empowered both locally and internationally.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎯</div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Our Mission</h3>
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); line-height: 1.6;">
+                        This approach makes our courses truly job-ready. By the time our students complete the training period, they are not only certified, they are prepared to step directly into fulfilling careers or higher academic opportunities.
+                    </p>
+                    <div style="background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.1)); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                        <p style="font-weight: 600; color: hsl(var(--primary));">
+                            "At LTH, you don't just earn a certificate, you become capable, confident, and career-ready."
+                        </p>
+                    </div>
+                    <a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">🎯 Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Our <span class="gradient-text">Popular Courses</span></h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Choose from our comprehensive range of courses designed to accelerate your career growth</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <!-- Languages Department -->
+                <div class="course-card animate-on-scroll">
+                    <div class="course-image">
+                        <img src="https://fluencycorp.com/wp-content/uploads/2019/07/learning-many-languages-1.jpg" alt="Languages Department">
+                        <div class="course-overlay">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+                                <h3 style="font-size: 1.5rem; font-weight: bold;">Languages Department</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Languages Department</h3>
+                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">Unlock global opportunities by mastering new languages with our expert instructors.</p>
+                        
+                        <h4 style="font-weight: 600; margin-bottom: 1rem;">Courses Offered:</h4>
+                        <div class="course-list">
+                            <div class="course-item">
+                                <span>💬</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Swahili</span>
+                            </div>
+                            <div class="course-item">
+                                <span>💬</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">English</span>
+                            </div>
+                            <div class="course-item">
+                                <span>💬</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">French</span>
+                            </div>
+                            <div class="course-item">
+                                <span>💬</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Kinyarwanda</span>
+                            </div>
+                            <div class="course-item">
+                                <span>💬</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Chinese</span>
+                            </div>
+                            <div class="course-item">
+                                <span>💬</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Dutch</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20Language%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="width: 100%;">
+                            💬 Inquire About Language Courses
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- IT Department -->
+                <div class="course-card animate-on-scroll">
+                    <div class="course-image">
+                        <img src="https://www.tuv.com/content-media-files/master-content/services/academy-life-care/a02-training-hr-development/1730-tuv-rheinland-it-certification-training-courses/tuv-rheinland-it-certification-training-courses-fo-159912250_core_2_2_1.jpg" alt="IT Department">
+                        <div class="course-overlay">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">💻</div>
+                                <h3 style="font-size: 1.5rem; font-weight: bold;">IT Department</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">IT Department</h3>
+                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">Build the technical skills demanded by today's rapidly evolving digital landscape.</p>
+                        
+                        <h4 style="font-weight: 600; margin-bottom: 1rem;">Courses Offered:</h4>
+                        <div class="course-list">
+                            <div class="course-item">
+                                <span>💻</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Full-Stack Web Development</span>
+                            </div>
+                            <div class="course-item">
+                                <span>📊</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Data Science & Analytics</span>
+                            </div>
+                            <div class="course-item">
+                                <span>🛡️</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Cyber Security Fundamentals</span>
+                            </div>
+                            <div class="course-item">
+                                <span>📱</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Mobile App Development</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20IT%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="width: 100%;">
+                            💻 Inquire About IT Courses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="section" style="background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted) / 0.3));">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Our Unique <span class="gradient-text">Teaching Methodology</span></h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Our proven 4-step approach ensures comprehensive learning and career success</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="card animate-on-scroll" style="position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -1rem; right: -1rem; font-size: 5rem; color: hsl(var(--muted) / 0.1); font-weight: bold;">01</div>
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 1.5rem; font-size: 1.5rem;">📚</div>
+                    <div style="position: relative; z-index: 2;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #3b82f6, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">01</span>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;">Foundational Knowledge</h3>
+                        </div>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">We start with strong theoretical basics, ensuring every student understands the core concepts before diving into practical applications.</p>
+                    </div>
+                </div>
+                
+                <div class="card animate-on-scroll" style="position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -1rem; right: -1rem; font-size: 5rem; color: hsl(var(--muted) / 0.1); font-weight: bold;">02</div>
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #10b981, #047857); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 1.5rem; font-size: 1.5rem;">💻</div>
+                    <div style="position: relative; z-index: 2;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #10b981, #047857); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">02</span>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;">Hands-On Practical Training</h3>
+                        </div>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">Our courses emphasize active learning through real-world projects, coding challenges, and case studies, building practical skills.</p>
+                    </div>
+                </div>
+                
+                <div class="card animate-on-scroll" style="position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -1rem; right: -1rem; font-size: 5rem; color: hsl(var(--muted) / 0.1); font-weight: bold;">03</div>
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 1.5rem; font-size: 1.5rem;">👥</div>
+                    <div style="position: relative; z-index: 2;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #8b5cf6, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">03</span>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;">Expert Mentorship & Feedback</h3>
+                        </div>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">Students receive personalized guidance from industry experts, with regular feedback sessions to refine their skills and understanding.</p>
+                    </div>
+                </div>
+                
+                <div class="card animate-on-scroll" style="position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -1rem; right: -1rem; font-size: 5rem; color: hsl(var(--muted) / 0.1); font-weight: bold;">04</div>
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 1.5rem; font-size: 1.5rem;">💼</div>
+                    <div style="position: relative; z-index: 2;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">04</span>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;">Career Development & Support</h3>
+                        </div>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">We provide robust career services, including resume building, interview preparation, and job placement assistance, ensuring a smooth transition into the workforce.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom CTA -->
+            <div class="animate-on-scroll" style="text-align: center; margin-top: 4rem;">
+                <div class="glass-effect" style="border-radius: 1rem; padding: 2rem; max-width: 600px; margin: 0 auto;">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ready to Start Your Learning Journey?</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">Experience our unique methodology and transform your career with hands-on, practical education.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">Apply Now</a>
+                        <a href="#courses" class="btn" style="border: 1px solid hsl(var(--primary)); color: hsl(var(--primary)); background: transparent;">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">What Our <span class="gradient-text">Students Say</span></h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Hear from our graduates who are now thriving in their careers</p>
+            </div>
+            
+            <!-- Video Placeholder -->
+            <div style="margin-bottom: 4rem;">
+                <div class="card animate-on-scroll" style="max-width: 800px; margin: 0 auto; padding: 0; overflow: hidden;">
+                    <div class="video-placeholder">
+                        <div class="video-content">
+                            <div class="play-button">▶</div>
+                            <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">Student Success Stories</h3>
+                            <p style="opacity: 0.9;">Watch how LTH transformed their careers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials Grid -->
+            <div class="grid grid-3">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                        "The IT program at LTH completely transformed my career. The hands-on approach and real-world projects prepared me perfectly for my current role as a developer."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b95b58c0?w=150&h=150&fit=crop&crop=face" alt="Sarah Johnson" class="author-avatar">
+                        <div>
+                            <h4 style="font-weight: 600; margin-bottom: 0.25rem;">Sarah Johnson</h4>
+                            <p style="font-size: 0.9rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.25rem;">Full-Stack Developer</p>
+                            <p style="font-size: 0.8rem; color: hsl(var(--primary));">Tech Solutions Rwanda</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                        "Thanks to LTH's language program, I now speak fluent French and English. This opened doors to amazing opportunities in the education sector."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Jean Baptiste Uwimana" class="author-avatar">
+                        <div>
+                            <h4 style="font-weight: 600; margin-bottom: 0.25rem;">Jean Baptiste Uwimana</h4>
+                            <p style="font-size: 0.9rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.25rem;">Language Instructor</p>
+                            <p style="font-size: 0.8rem; color: hsl(var(--primary));">International School of Kigali</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                        "The Data Science course was incredibly comprehensive. The mentorship and practical projects gave me the confidence to pursue my dream career in analytics."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" alt="Marie Claire Muhimpundu" class="author-avatar">
+                        <div>
+                            <h4 style="font-weight: 600; margin-bottom: 0.25rem;">Marie Claire Muhimpundu</h4>
+                            <p style="font-size: 0.9rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.25rem;">Data Analyst</p>
+                            <p style="font-size: 0.8rem; color: hsl(var(--primary));">Rwanda Development Board</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Success Stats -->
+            <div class="grid grid-4 animate-on-scroll" style="margin-top: 4rem;">
+                <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">98%</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Job Placement Rate</div>
+                </div>
+                <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">4.9/5</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Average Rating</div>
+                </div>
+                <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">1000+</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Happy Graduates</div>
+                </div>
+                <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">50+</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Partner Companies</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section" style="background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted) / 0.3));">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Learning <span class="gradient-text">Resources</span></h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Access our comprehensive collection of learning materials and resources</p>
+            </div>
+            
+            <!-- Featured Video Section -->
+            <div style="margin-bottom: 4rem;">
+                <div class="card animate-on-scroll" style="max-width: 800px; margin: 0 auto;">
+                    <h3 style="text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Explore Our Learning Videos</h3>
+                    <p style="text-align: center; color: hsl(var(--muted-foreground)); margin-bottom: 2rem;">
+                        Mosley explains how our language teaching system works - we are the hub of languages
+                    </p>
+                    <div class="video-placeholder" onclick="window.open('https://youtube.com/@loyaltraininghub?si=33mh4Oqg70XDfp0J', '_blank')">
+                        <div class="video-content">
+                            <div class="play-button">▶</div>
+                            <h4 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Language Teaching System Overview</h4>
+                            <p style="opacity: 0.9;">Click to watch on YouTube</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resources Grid -->
+            <div class="grid grid-4">
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">🎥</div>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Learning Videos</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Comprehensive video tutorials covering all course materials</p>
+                    <a href="https://youtube.com/@loyaltraininghub?si=33mh4Oqg70XDfp0J" class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;" target="_blank">Access Now</a>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">📚</div>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Study Materials</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Downloadable resources, guides, and practice exercises</p>
+                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">Coming Soon</button>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #10b981, #047857); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">🎧</div>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Audio Lessons</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Listening exercises and pronunciation guides for language learners</p>
+                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">Coming Soon</button>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">📝</div>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Assessment Tools</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Practice tests and skill evaluation resources</p>
+                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">Coming Soon</button>
+                </div>
+            </div>
+            
+            <!-- Skills Enhancement Section -->
+            <div class="grid grid-2 animate-on-scroll" style="align-items: center; margin-top: 4rem;">
+                <div>
+                    <h3 style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem;">
+                        Enhance Your <span class="gradient-text">Skills</span>
+                    </h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        We believe in a holistic approach to education, combining theoretical knowledge with practical application. Our resources are designed to help you master essential skills crucial for any professional field.
+                    </p>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                        Whether you're learning a new language or developing technical skills, our comprehensive resource library supports your journey every step of the way.
+                    </p>
+                </div>
+                
+                <div class="grid grid-2" style="gap: 1rem;">
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🗣️</div>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Speaking</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Interactive speaking exercises and conversation practice</p>
+                    </div>
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">👂</div>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Listening</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Audio comprehension and active listening skills</p>
+                    </div>
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">✍️</div>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Writing</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Structured writing practice and composition skills</p>
+                    </div>
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📖</div>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Reading</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Reading comprehension and analytical skills</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Get In <span class="gradient-text">Touch With Us</span></h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Ready to start your learning journey? Contact us today and let's discuss your goals</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <!-- Contact Form -->
+                <div class="contact-form animate-on-scroll">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-textarea" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="animate-on-scroll">
+                    <div class="contact-info" style="margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Contact Information</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Address</h4>
+                                <p style="color: hsl(var(--muted-foreground));">KG 15 Ave, Kigali, Rwanda</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Phone</h4>
+                                <a href="tel:+250788244964" style="color: hsl(var(--muted-foreground)); text-decoration: none;">+250 788 244 964</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Email</h4>
+                                <a href="mailto:loyal.training.hub@gmail.com" style="color: hsl(var(--muted-foreground)); text-decoration: none;">loyal.training.hub@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div>
+                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Hours</h4>
+                                <p style="color: hsl(var(--muted-foreground));">Mon-Fri: 8AM-6PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="contact-info" style="margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;">Follow Us</h3>
+                        <div class="social-links">
+                            <a href="https://web.facebook.com/profile.php?id=100086507744005" class="social-link" target="_blank">📘</a>
+                            <a href="https://x.com/loyal_training" class="social-link" target="_blank">🐦</a>
+                            <a href="https://www.instagram.com/loyal.training.hub" class="social-link" target="_blank">📷</a>
+                            <a href="https://www.linkedin.com/company/loyal-training-hub" class="social-link" target="_blank">💼</a>
+                            <a href="https://youtube.com/@loyaltraininghub?si=33mh4Oqg70XDfp0J" class="social-link" target="_blank">🎥</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Contact -->
+                    <div style="background: var(--gradient-hero); color: white; border-radius: 1rem; padding: 2rem; text-align: center;">
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem;">Ready to Start Learning?</h3>
+                        <p style="margin-bottom: 1.5rem; opacity: 0.95;">
+                            Contact us directly via WhatsApp for instant support and enrollment assistance.
+                        </p>
+                        <a href="https://wa.me/250788244964" class="btn btn-outline" target="_blank" style="width: 100%;">
+                            📞 Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                        <img src="https://i.imgur.com/uLLa9dm.png" alt="LTH Logo" style="width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover;" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23007bff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-weight=%22bold%22>LTH</text></svg>'">
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: bold; margin: 0;" class="gradient-text">Loyal Training Hub</h3>
+                            <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin: 0;">Empowering Futures</p>
+                        </div>
+                    </div>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6; margin-bottom: 1.5rem;">
+                        Leading educational institution dedicated to fostering talent and driving career growth in Rwanda and beyond through practical, skill-focused training programs.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/profile.php?id=100086507744005" class="social-link" target="_blank">📘</a>
+                        <a href="https://x.com/loyal_training" class="social-link" target="_blank">🐦</a>
+                        <a href="https://www.instagram.com/loyal.training.hub" class="social-link" target="_blank">📷</a>
+                        <a href="https://www.linkedin.com/company/loyal-training-hub" class="social-link" target="_blank">💼</a>
+                        <a href="https://youtube.com/@loyaltraininghub?si=33mh4Oqg70XDfp0J" class="social-link" target="_blank">🎥</a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#methodology">Methodology</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Popular Courses -->
+                <div class="footer-section">
+                    <h4>Popular Courses</h4>
+                    <ul>
+                        <li><a href="#courses">Web Development</a></li>
+                        <li><a href="#courses">Data Science</a></li>
+                        <li><a href="#courses">English Language</a></li>
+                        <li><a href="#courses">French Language</a></li>
+                        <li><a href="#courses">Mobile Development</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem;">
+                        <span style="color: hsl(var(--primary)); margin-top: 0.25rem;">📍</span>
+                        <div>
+                            <p style="font-weight: 500; margin-bottom: 0.25rem;">Address</p>
+                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">KG 15 Ave, Kigali, Rwanda</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem;">
+                        <span style="color: hsl(var(--primary)); margin-top: 0.25rem;">📞</span>
+                        <div>
+                            <p style="font-weight: 500; margin-bottom: 0.25rem;">Phone</p>
+                            <a href="tel:+250788244964" style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; text-decoration: none;">+250 788 244 964</a>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <span style="color: hsl(var(--primary)); margin-top: 0.25rem;">✉️</span>
+                        <div>
+                            <p style="font-weight: 500; margin-bottom: 0.25rem;">Email</p>
+                            <a href="mailto:loyal.training.hub@gmail.com" style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; text-decoration: none;">loyal.training.hub@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- WhatsApp CTA -->
+            <div style="background: var(--gradient-hero); border-radius: 1rem; padding: 2rem; margin: 2rem 0; color: white;">
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Ready to Start Your Learning Journey?</h3>
+                        <p style="opacity: 0.95; margin: 0;">Contact us today and let's discuss your goals!</p>
+                    </div>
+                    <a href="https://wa.me/250788244964" class="btn btn-outline" target="_blank">📞 WhatsApp Us Now</a>
+                </div>
+            </div>
+            
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                    <div style="text-align: center;">
+                        <p style="margin-bottom: 0.5rem;">© 2024 Loyal Training Hub Ltd. All rights reserved.</p>
+                        <p style="font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.25rem;">
+                            Made with ❤️ in Rwanda
+                        </p>
+                    </div>
+                    <button onclick="scrollToTop()" class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">
+                        ⬆️ Back to Top
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/250788244964" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">💬</a>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('fade-out');
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to Top Function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Scroll Animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('animate');
+                }
+            });
+        }
+
+        // Header Scroll Effect
+        function handleHeaderScroll() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        }
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = this.querySelector('input[placeholder="Your Name"]').value;
+            const email = this.querySelector('input[placeholder="Your Email"]').value;
+            const subject = this.querySelector('input[placeholder="Subject"]').value;
+            const message = this.querySelector('textarea').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hello! I'm ${name}.\n\nEmail: ${email}\nSubject: ${subject}\n\nMessage: ${message}`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/250788244964?text=${encodedMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show success message
+            alert('Thank you for your message! We will redirect you to WhatsApp to complete your inquiry.');
+        });
+
+        // Event Listeners
+        window.addEventListener('scroll', () => {
+            animateOnScroll();
+            handleHeaderScroll();
+        });
+
+        window.addEventListener('load', animateOnScroll);
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Prevent mobile menu from closing when clicking inside
+        document.getElementById('mobileMenu').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Loading dots animation
+        setInterval(function() {
+            const dots = document.querySelector('.loading-dots');
+            if (dots) {
+                let current = dots.textContent;
+                if (current === '...') {
+                    dots.textContent = '';
+                } else {
+                    dots.textContent += '.';
+                }
+            }
+        }, 500);
+
+        // Video placeholder click handler
+        document.querySelectorAll('.video-placeholder').forEach(video => {
+            video.addEventListener('click', function() {
+                const url = this.getAttribute('onclick');
+                if (url && url.includes('youtube.com')) {
+                    // Extract URL and open
+                    const match = url.match(/window\.open\('([^']+)'/);
+                    if (match) {
+                        window.open(match[1], '_blank');
+                    }
+                }
+            });
+        });
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trigger initial animation check
+            setTimeout(animateOnScroll, 100);
+            
+            // Add keyboard navigation support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Performance optimization: Throttle scroll events
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    animateOnScroll();
+                    handleHeaderScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
+    </script>
+</body>
+</html>
