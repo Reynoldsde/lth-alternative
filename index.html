@@ -237,20 +237,20 @@
         }
         
         .logo-img {
-            width: 3rem;
-            height: 3rem;
+            width: 6rem;
+            height: 6rem;
             border-radius: 50%;
             object-fit: cover;
         }
         
         .logo-text h1 {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: bold;
             margin: 0;
         }
-        
+
         .logo-text p {
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             color: hsl(var(--muted-foreground));
             margin: 0;
         }
@@ -335,6 +335,33 @@
         
         .mobile-menu a:hover {
             background: hsl(var(--muted));
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-weight: 500;
+            color: hsl(var(--foreground));
+            text-decoration: none;
+        }
+
+        .language-switcher:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
         /* Hero Section */
@@ -832,6 +859,18 @@
             100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); }
         }
         
+        @keyframes pulse-glow {
+            0% { box-shadow: var(--shadow-premium); transform: scale(1); }
+            50% { box-shadow: var(--shadow-glow); transform: scale(1.02); }
+            100% { box-shadow: var(--shadow-premium); transform: scale(1); }
+        }
+        
+        @keyframes pulse-secondary {
+            0% { box-shadow: var(--shadow-card); }
+            50% { box-shadow: var(--shadow-premium); }
+            100% { box-shadow: var(--shadow-card); }
+        }
+        
         /* Enhanced Responsive Design */
         @media (max-width: 1024px) {
             .hero-stats {
@@ -1115,6 +1154,43 @@
         .video-content {
             text-align: center;
         }
+        
+        /* Apply/Donate Dropdown Styles */
+        .apply-button-container, .donate-button-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .apply-dropdown, .donate-dropdown {
+            position: absolute;
+            top: 100%;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-card);
+            border: 1px solid hsl(var(--border));
+            z-index: 1000;
+            margin-top: 0.5rem;
+            overflow: hidden;
+            display: none;
+            min-width: 200px;
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: hsl(var(--foreground));
+            transition: background-color 0.2s;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: hsl(var(--muted));
+        }
     </style>
 </head>
 <body>
@@ -1136,36 +1212,51 @@
                     <img src="https://i.imgur.com/uLLa9dm.png" alt="LTH Logo" class="logo-img" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23007bff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-weight=%22bold%22>LTH</text></svg>'">
                     <div class="logo-text">
                         <h1 class="gradient-text">Loyal Training Hub</h1>
-                        <p>Empowering Futures</p>
+                        <p data-translate="empoweringFutures">Empowering Futures</p>
                     </div>
                 </a>
                 
                 <ul class="nav-menu">
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#unique">Our Approach</a></li>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#methodology">Methodology</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#resources">Resources</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#hero" data-translate="home">Home</a></li>
+                    <li><a href="#lth-admission" data-translate="lthAdmission">LTH Admission</a></li>
+                    <li><a href="#study-at-lth" data-translate="studyAtLth">Study at LTH</a></li>
+                    <li><a href="#about" data-translate="about">About Us</a></li>
+                    <li><a href="#programs" data-translate="programs">Programs</a></li>
+                    <li><a href="#contact" data-translate="contact">Contact</a></li>
                 </ul>
                 
-                <a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">Get Started</a>
+                <div class="nav-actions">
+                    <button class="language-switcher" onclick="toggleLanguage()">
+                        🌐 <span id="currentLang">FR</span>
+                    </button>
+                    <div class="apply-button-container" style="position: relative; display: inline-block;">
+                        <button class="btn btn-primary apply-btn-main" style="animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                            <span data-translate="applyNow">🎓 Apply Now</span>
+                            <span style="margin-left: 0.5rem;">▼</span>
+                        </button>
+                        <div class="apply-dropdown" style="position: absolute; top: 100%; right: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 200px;">
+                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                            </a>
+                            <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
                 
                 <div class="mobile-menu" id="mobileMenu">
                     <ul>
-                        <li><a href="#hero" onclick="closeMobileMenu()">Home</a></li>
-                        <li><a href="#about" onclick="closeMobileMenu()">About Us</a></li>
-                        <li><a href="#unique" onclick="closeMobileMenu()">Our Approach</a></li>
-                        <li><a href="#courses" onclick="closeMobileMenu()">Courses</a></li>
-                        <li><a href="#methodology" onclick="closeMobileMenu()">Methodology</a></li>
-                        <li><a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a></li>
-                        <li><a href="#resources" onclick="closeMobileMenu()">Resources</a></li>
-                        <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
-                        <li><a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">Get Started</a></li>
+                        <li><a href="#hero" onclick="closeMobileMenu()" data-translate="home">Home</a></li>
+                        <li><a href="#lth-admission" onclick="closeMobileMenu()" data-translate="lthAdmission">LTH Admission</a></li>
+                        <li><a href="#study-at-lth" onclick="closeMobileMenu()" data-translate="studyAtLth">Study at LTH</a></li>
+                        <li><a href="#about" onclick="closeMobileMenu()" data-translate="about">About Us</a></li>
+                        <li><a href="#programs" onclick="closeMobileMenu()" data-translate="programs">Programs</a></li>
+                        <li><a href="#contact" onclick="closeMobileMenu()" data-translate="contact">Contact</a></li>
+                        <li><button class="language-switcher" onclick="toggleLanguage(); closeMobileMenu();">🌐 <span id="currentLangMobile">FR</span></button></li>
+                        <li><a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank" data-translate="getStarted">Get Started</a></li>
                     </ul>
                 </div>
             </nav>
@@ -1176,32 +1267,234 @@
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content animate-on-scroll">
-                <h1>Unlock Your Professional and Academic Potential with <span class="gradient-text">Loyal Training Hub</span></h1>
-                <p>At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more.</p>
+                <h1><span data-translate="heroTitle">Unlock Your Professional and Academic Potential</span> <span data-translate="heroSubtitle">with <span class="gradient-text">Loyal Training Hub</span></span></h1>
+                <p data-translate="heroDescription">At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more.</p>
                 
                 <div class="hero-stats">
                     <div class="stat-card">
                         <span class="stat-number">2500+</span>
-                        <span class="stat-label">Learners Empowered</span>
+                        <span class="stat-label" data-translate="learnersEmpowered">Learners Empowered</span>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number">30+</span>
-                        <span class="stat-label">Certified Trainers</span>
+                        <span class="stat-label" data-translate="certifiedTrainers">Certified Trainers</span>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number">95%</span>
-                        <span class="stat-label">Skill Improvement</span>
+                        <span class="stat-label" data-translate="skillImprovement">Skill Improvement</span>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number">20+</span>
-                        <span class="stat-label">Corporate Partners</span>
+                        <span class="stat-label" data-translate="corporatePartners">Corporate Partners</span>
                     </div>
                 </div>
                 
                 <div class="hero-buttons">
-                    <a href="#courses" class="btn btn-outline">📚 Explore Our Courses</a>
-                    <a href="#contact" class="btn btn-outline">👥 Get in Touch</a>
+                    <div class="apply-button-container" style="position: relative; display: inline-block;">
+                        <button class="btn btn-primary apply-btn-main" style="font-size: 1.3rem; padding: 1.25rem 2.5rem; box-shadow: var(--shadow-glow); animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                            <span data-translate="applyNow">🎓 Apply Now</span>
+                            <span style="margin-left: 0.5rem;">▼</span>
+                        </button>
+                        <div class="apply-dropdown" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none;">
+                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                            </a>
+                            <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                            </a>
+                        </div>
+                    </div>
+                    <div class="donate-button-container" style="position: relative; display: inline-block;">
+                        <button class="btn btn-secondary donate-btn-main" style="font-size: 1.2rem; padding: 1rem 2rem; box-shadow: var(--shadow-premium); animation: pulse-secondary 3s infinite;" onclick="toggleDonateDropdown(this)">
+                            <span data-translate="donateNow">💝 Donate Now - Support Education</span>
+                            <span style="margin-left: 0.5rem;">▼</span>
+                        </button>
+                        <div class="donate-dropdown" style="position: absolute; top: 100%; left: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 300px;">
+                            <div style="padding: 1rem; border-bottom: 1px solid hsl(var(--border));">
+                                <h4 style="font-weight: bold; margin-bottom: 0.5rem; color: hsl(var(--primary));">💳 Bank Transfer</h4>
+                                <div style="font-size: 0.85rem; color: hsl(var(--muted-foreground)); line-height: 1.4;">
+                                    <p><strong>Bank Swift Code:</strong> EQBL RW RW</p>
+                                    <p><strong>Account Name:</strong> LOYAL TRAINING HUB LTD</p>
+                                    <p><strong>Account Number:</strong> 4013200912230</p>
+                                    <p><strong>Currency:</strong> RWANDAN FRANCS</p>
+                                </div>
+                            </div>
+                            <a href="tel:0782407285" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;">
+                                <span style="margin-right: 0.5rem;">📱</span>MTN Mobile Money: 0782407285
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#programs" class="btn btn-outline"><span data-translate="exploreCourses">📚 Explore Our Programs</span></a>
+                    <a href="#contact" class="btn btn-outline"><span data-translate="getInTouch">👥 Get in Touch</span></a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LTH Admission Section -->
+    <section id="lth-admission" class="section" style="background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--secondary) / 0.05));">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title"><span data-translate="admissionTitle">Admission to <span class="gradient-text">Loyal Training Hub</span></span></h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-translate="admissionSubtitle">Learn about our admission process and requirements for various training programs.</p>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div class="apply-button-container" style="position: relative; display: inline-block;">
+                    <button class="btn btn-primary apply-btn-main" style="font-size: 1.2rem; padding: 1rem 2rem; animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                        <span data-translate="applyNow">🎓 Apply Now</span>
+                        <span style="margin-left: 0.5rem;">▼</span>
+                    </button>
+                    <div class="apply-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 200px;">
+                        <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                            <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                        </a>
+                        <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                            <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-header animate-on-scroll" style="margin-bottom: 3rem;">
+                <h3 class="section-title" style="font-size: 2rem;" data-translate="trainingPrograms">Our Training Programs</h3>
+                <p class="section-subtitle" data-translate="trainingProgramsDesc">Explore our range of specialized programs designed to enhance your skills and advance your career.</p>
+            </div>
+            
+            <div class="grid grid-2" style="gap: 2rem;">
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1.5rem;">💻</div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="softwareDevelopment">Software Development Program</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;" data-translate="softwareDevelopmentDesc">Master the latest programming languages, frameworks, and tools to develop robust software applications. Our comprehensive curriculum covers front-end and back-end development, database management, and software architecture.</p>
+                    <a href="#application" class="btn btn-primary"><span data-translate="applyNow">Apply Now</span></a>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1.5rem;">🗣️</div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="languageProficiency">Language Proficiency Program</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;" data-translate="languageProficiencyDesc">Develop fluency in English, French, Chinese, or other languages through our immersive language programs. Our expert instructors use proven methodologies to help you achieve conversational and professional proficiency within a set timeframe.</p>
+                    <a href="#application" class="btn btn-primary"><span data-translate="applyNow">Apply Now</span></a>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1.5rem;">🖥️</div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="ictComputerSoftware">ICT and Computer Software</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;" data-translate="ictComputerSoftwareDesc">Build essential skills in computer software including ArchiCAD, Revit, Microsoft Project Management, SolidWorks, Adobe Photoshop, Illustrator, and more. Our hands-on approach ensures you gain practical experience with industry-standard tools.</p>
+                    <a href="#application" class="btn btn-primary"><span data-translate="applyNow">Apply Now</span></a>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1.5rem;">🏆</div>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="internationalCertification">International Language Certification Program</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;" data-translate="internationalCertificationDesc">This program prepares you to obtain internationally recognized language certificates such as the DELF for French, TOEFL or IELTS for English, DELE for Spanish. Whether you want to enhance your language skills or validate your proficiency level, this course offers certification opportunities in multiple languages. Get ready to take certification exams and expand your professional and academic horizons.</p>
+                    <a href="#application" class="btn btn-primary"><span data-translate="applyNow">Apply Now</span></a>
+                </div>
+            </div>
+            
+            <div class="section-header animate-on-scroll" style="margin: 4rem 0 3rem;">
+                <h3 class="section-title" style="font-size: 2rem;" data-translate="learningExperience">The Loyal Training Hub Learning Experience</h3>
+            </div>
+            
+            <div class="grid grid-3" style="gap: 2rem;">
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📚</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: hsl(var(--primary)); margin-bottom: 0.5rem;">01</div>
+                    <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem;" data-translate="learningByDoing">Learning by Doing</h3>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="learningByDoingDesc">Our students learn through real-world projects, internships, and hands-on experiences that prepare them for the workplace.</p>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌍</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: hsl(var(--primary)); margin-bottom: 0.5rem;">02</div>
+                    <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem;" data-translate="realWorldExposure">Get Real-World Exposure</h3>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="realWorldExposureDesc">We immerse our students in situations where they can use their skill. Speaking with native speakers or join conversation groups, improving public speaking through practice in front of a big audience.</p>
+                </div>
+                
+                <div class="card animate-on-scroll" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌐</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: hsl(var(--primary)); margin-bottom: 0.5rem;">03</div>
+                    <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem;" data-translate="globalPerspective">Global Perspective</h3>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="globalPerspectiveDesc">Our diverse student body and faculty bring global perspectives to the classroom, preparing students for a connected world.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;" class="animate-on-scroll">
+                <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="readyToJoin">Ready to Join Loyal Training Hub?</h3>
+                <p style="color: hsl(var(--muted-foreground)); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;" data-translate="readyToJoinDesc">Take the first step towards a transformative education that will prepare you for a meaningful career and Get Real-World Exposure.</p>
+                <a href="#application" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;"><span data-translate="applyNow">🎓 Apply Now</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study at LTH Section -->
+    <section id="study-at-lth" class="section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title"><span data-translate="studyAtLthTitle">What makes <span class="gradient-text">Loyal Training Hub</span> Unique?</span></h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="grid grid-2" style="align-items: center; gap: 3rem;">
+                <div class="animate-on-scroll">
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="studyAtLthDesc1">
+                        At Loyal Training Hub (LTH), we believe the best learning happens through hands-on, real-world experiences. That's why we go beyond theory by integrating practical sessions and self-directed projects into every program we offer, whether it's language mastery or software training.
+                    </p>
+                    
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="studyAtLthDesc2">
+                        Our students don't just learn; they do. From building websites, designing digital products, and analyzing real datasets, to practicing public speaking, engaging in role plays, and preparing for international exams like IELTS, TOEFL, DELF, and TEF, everything is designed to build confidence, proficiency, and practical job skills.
+                    </p>
+                    
+                    <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="studyAtLthDesc3">
+                        This approach makes our courses truly job-ready. By the time our students complete the training period, they are not only certified, they are prepared to step directly into fulfilling careers or higher academic opportunities. Whether you're pursuing English, French, Chinese, Swahili, or tech skills, you'll find our programs built around experience, relevance, and real results. At LTH, you don't just earn a certificate, you become capable, confident, and career-ready.
+                    </p>
+                    
+                    <div class="apply-button-container" style="position: relative; display: inline-block;">
+                        <button class="btn btn-primary apply-btn-main" style="font-size: 1.2rem; padding: 1rem 2rem; animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                            <span data-translate="applyNow">🎓 Apply Now</span>
+                            <span style="margin-left: 0.5rem;">▼</span>
+                        </button>
+                        <div class="apply-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 200px;">
+                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                            </a>
+                            <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll" style="position: relative;">
+                    <img src="https://i.imgur.com/Ax0veGU.jpeg" alt="Students at LTH" style="width: 100%; border-radius: 1rem; box-shadow: var(--shadow-card);">
+                    <div style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 1rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <p style="font-weight: 600; color: hsl(var(--primary)); margin-bottom: 0.5rem;" data-translate="studentsAtLth">Students at LTH</p>
+                        <p style="font-size: 0.9rem; color: hsl(var(--muted-foreground)); margin: 0;" data-translate="studentsAtLthDesc">Learning through hands-on experience and practical application</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card animate-on-scroll" style="margin-top: 4rem; text-align: center; background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.1));">
+                <h3 style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;" data-translate="provenSuccess">Proven Success at Loyal Training Hub (LTH)</h3>
+                <p style="color: hsl(var(--muted-foreground)); margin-bottom: 2rem; line-height: 1.6;" data-translate="provenSuccessDesc">
+                    At Loyal Training Hub (LTH), we believe the best learning happens through hands-on, real-world experiences. That's why we go beyond theory by integrating practical sessions and self-directed projects into every program we offer, whether it's language mastery or software training.
+                </p>
+                
+                <div style="background: white; border-radius: 1rem; padding: 2rem; margin: 2rem 0; box-shadow: var(--shadow-card);">
+                    <p style="font-weight: 600; color: hsl(var(--primary)); margin-bottom: 1rem;" data-translate="didYouKnow">Did you know?</p>
+                    <div style="font-size: 3rem; font-weight: bold; color: hsl(var(--primary)); margin-bottom: 0.5rem;">80%</div>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="graduateSuccess">
+                        of our graduates are employed or have started their own businesses within just 3 months after they have completed the training.
+                    </p>
+                </div>
+                
+                <p style="color: hsl(var(--muted-foreground)); margin-bottom: 2rem; line-height: 1.6;" data-translate="realWorldImpact">
+                    This reflects the real-world impact of our programs in both software training and language mastery, empowering learners to seize job opportunities or launch entrepreneurial ventures with confidence. From mastering English, French, Chinese, and other key languages to gaining practical skills in software development, graphic design, digital marketing, and data analysis, our graduates walk away with the tools and mindset needed for success.
+                </p>
+                
+                <p style="font-weight: 600; color: hsl(var(--primary)); font-size: 1.1rem;" data-translate="lthPromise">
+                    At LTH, you're not just learning, you're preparing for a thriving future.
+                </p>
             </div>
         </div>
     </section>
@@ -1216,15 +1509,15 @@
                 
                 <div class="animate-on-scroll">
                     <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-                        <h2 class="section-title">About <span class="gradient-text">Loyal Training Hub</span></h2>
+                        <h2 class="section-title"><span data-translate="aboutTitle">About <span class="gradient-text">Loyal Training Hub</span></span></h2>
                         <div class="section-divider" style="margin: 1.5rem 0;"></div>
                     </div>
                     
-                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="aboutDescription1">
                         At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more, empowering you to communicate with confidence and fluency.
                     </p>
                     
-                    <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                    <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="aboutDescription2">
                         At Loyal Training Hub, we believe that practical, hands-on learning experiences are the most effective way to develop professional skills. Our training programs combine theoretical knowledge with real-world applications, ensuring that you're not just learning concepts, but developing the ability to apply them in your career.
                     </p>
                     
@@ -1232,45 +1525,49 @@
                         <div class="feature-card">
                             <div class="feature-icon">📅</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Flexible Schedules</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Learn at your own pace with our flexible scheduling options</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;" data-translate="flexibleSchedules">Flexible Schedules</h3>
+                                <p style="color: hsl(var(--muted-foreground));" data-translate="flexibleSchedulesDesc">Learn at your own pace with our flexible scheduling options</p>
                             </div>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">👨‍🏫</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Experienced Trainers</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Learn from instructors with real-world expertise in their fields</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;" data-translate="experiencedTrainers">Experienced Trainers</h3>
+                                <p style="color: hsl(var(--muted-foreground));" data-translate="experiencedTrainersDesc">Learn from instructors with real-world expertise in their fields</p>
                             </div>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">💻</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Modern Learning</h3>
-                                <p style="color: hsl(var(--muted-foreground));">State-of-the-art facilities and contemporary teaching methods</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;" data-translate="modernLearning">Modern Learning</h3>
+                                <p style="color: hsl(var(--muted-foreground));" data-translate="modernLearningDesc">State-of-the-art facilities and contemporary teaching methods</p>
                             </div>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">💰</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Affordable Pricing</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Competitive rates with flexible installment payment plans</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;" data-translate="affordablePricing">Affordable Pricing</h3>
+                                <p style="color: hsl(var(--muted-foreground));" data-translate="affordablePricingDesc">Competitive rates with flexible installment payment plans</p>
                             </div>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">🚀</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">No Fixed Intakes</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Start immediately after your placement test - no waiting periods</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;" data-translate="noFixedIntakes">No Fixed Intakes</h3>
+                                <p style="color: hsl(var(--muted-foreground));" data-translate="noFixedIntakesDesc">Start immediately after your placement test - no waiting periods</p>
                             </div>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">✨</div>
                             <div>
-                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Proven Impact</h3>
-                                <p style="color: hsl(var(--muted-foreground));">Over 2,500 learners empowered both locally and internationally</p>
+                                <h3 style="font-weight: 600; margin-bottom: 0.5rem;" data-translate="provenImpact">Proven Impact</h3>
+                                <p style="color: hsl(var(--muted-foreground));" data-translate="provenImpactDesc">Over 2,500 learners empowered both locally and internationally</p>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="#application" class="btn btn-primary" style="font-size: 1.1rem; padding: 0.875rem 1.75rem; animation: pulse-glow 2s infinite;"><span data-translate="applyNow">🎓 Apply Now</span></a>
                     </div>
                 </div>
             </div>
@@ -1281,63 +1578,76 @@
     <section id="unique" class="section" style="background: linear-gradient(135deg, hsl(var(--muted) / 0.3), hsl(var(--background)));">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2 class="section-title">What Makes <span class="gradient-text">Loyal Training Hub</span> Unique?</h2>
+                <h2 class="section-title"><span data-translate="uniqueTitle">What Makes <span class="gradient-text">Loyal Training Hub</span> Unique?</span></h2>
                 <div class="section-divider"></div>
             </div>
             
             <div class="grid grid-2" style="align-items: center;">
                 <div class="animate-on-scroll">
-                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="uniqueDescription1">
                         At Loyal Training Hub (LTH), we believe the best learning happens through hands-on, real-world experiences. That's why we go beyond theory by integrating practical sessions and self-directed projects into every program we offer, whether it's language mastery or software training.
                     </p>
                     
-                    <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                    <p style="margin-bottom: 2rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="uniqueDescription2">
                         Our students don't just learn; they do. From building websites, designing digital products, and analyzing real datasets, to practicing public speaking, engaging in role plays, and preparing for international exams like IELTS, TOEFL, DELF, and TEF, everything is designed to build confidence, proficiency, and practical job skills.
                     </p>
                     
                     <div class="grid grid-3" style="gap: 1.5rem;">
                         <div class="card" style="text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: 1rem;">💰</div>
-                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;">Affordable Pricing</h3>
-                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Competitive rates with flexible installment payment plans.</p>
+                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;" data-translate="affordablePricing">Affordable Pricing</h3>
+                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;" data-translate="affordablePricingDesc">Competitive rates with flexible installment payment plans.</p>
                         </div>
                         <div class="card" style="text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: 1rem;">⏰</div>
-                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;">No Fixed Intakes</h3>
-                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Start immediately after your placement test - no waiting periods.</p>
+                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;" data-translate="noFixedIntakes">No Fixed Intakes</h3>
+                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;" data-translate="noFixedIntakesDesc">Start immediately after your placement test - no waiting periods.</p>
                         </div>
                         <div class="card" style="text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: 1rem;">🏆</div>
-                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;">Proven Impact</h3>
-                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Over 1000+ learners empowered both locally and internationally.</p>
+                            <h3 style="font-weight: bold; margin-bottom: 0.5rem;" data-translate="provenImpact">Proven Impact</h3>
+                            <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;" data-translate="provenImpactDesc">Over 1000+ learners empowered both locally and internationally.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="card animate-on-scroll" style="text-align: center;">
                     <div style="font-size: 4rem; margin-bottom: 1rem;">🎯</div>
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Our Mission</h3>
-                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); line-height: 1.6;">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="ourMission">Our Mission</h3>
+                    <p style="margin-bottom: 1.5rem; color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="missionDescription">
                         This approach makes our courses truly job-ready. By the time our students complete the training period, they are not only certified, they are prepared to step directly into fulfilling careers or higher academic opportunities.
                     </p>
                     <div style="background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.1)); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                        <p style="font-weight: 600; color: hsl(var(--primary));">
+                        <p style="font-weight: 600; color: hsl(var(--primary));" data-translate="missionQuote">
                             "At LTH, you don't just earn a certificate, you become capable, confident, and career-ready."
                         </p>
                     </div>
-                    <a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">🎯 Apply Now</a>
+                    <div class="apply-button-container" style="position: relative; display: inline-block;">
+                        <button class="btn btn-primary apply-btn-main" style="animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                            <span data-translate="applyNow">🎓 Apply Now</span>
+                            <span style="margin-left: 0.5rem;">▼</span>
+                        </button>
+                        <div class="apply-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 200px;">
+                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                            </a>
+                            <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Courses Section -->
-    <section id="courses" class="section">
+    <!-- Programs Section -->
+    <section id="programs" class="section">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Our <span class="gradient-text">Popular Courses</span></h2>
+                <h2 class="section-title"><span data-translate="programsTitle">Our <span class="gradient-text">Programs</span></span></h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Choose from our comprehensive range of courses designed to accelerate your career growth</p>
+                <p class="section-subtitle" data-translate="programsSubtitle">Choose from our comprehensive range of programs designed to accelerate your career growth</p>
             </div>
             
             <div class="grid grid-2">
@@ -1348,45 +1658,48 @@
                         <div class="course-overlay">
                             <div style="text-align: center;">
                                 <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
-                                <h3 style="font-size: 1.5rem; font-weight: bold;">Languages Department</h3>
+                                <h3 style="font-size: 1.5rem; font-weight: bold;" data-translate="languagesDept">Languages Department</h3>
                             </div>
                         </div>
                     </div>
                     <div class="course-content">
-                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Languages Department</h3>
-                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">Unlock global opportunities by mastering new languages with our expert instructors.</p>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;" data-translate="languagesDept">Languages Department</h3>
+                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;" data-translate="languagesDescription">Unlock global opportunities by mastering new languages with our expert instructors.</p>
                         
-                        <h4 style="font-weight: 600; margin-bottom: 1rem;">Courses Offered:</h4>
+                        <h4 style="font-weight: 600; margin-bottom: 1rem;" data-translate="coursesOffered">Courses Offered:</h4>
                         <div class="course-list">
                             <div class="course-item">
                                 <span>💬</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Swahili</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="swahili">Swahili</span>
                             </div>
                             <div class="course-item">
                                 <span>💬</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">English</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="english">English</span>
                             </div>
                             <div class="course-item">
                                 <span>💬</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">French</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="french">French</span>
                             </div>
                             <div class="course-item">
                                 <span>💬</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Kinyarwanda</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="kinyarwanda">Kinyarwanda</span>
                             </div>
                             <div class="course-item">
                                 <span>💬</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Chinese</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="chinese">Chinese</span>
                             </div>
                             <div class="course-item">
                                 <span>💬</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Dutch</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="dutch">Dutch</span>
                             </div>
                         </div>
                         
-                        <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20Language%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="width: 100%;">
-                            💬 Inquire About Language Courses
-                        </a>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="#application" class="btn btn-primary" style="flex: 1; min-width: 140px; animation: pulse-glow 2s infinite;"><span data-translate="applyNow">🎓 Apply Now</span></a>
+                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20Language%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="flex: 1; min-width: 140px;">
+                                <span data-translate="inquireLanguages">💬 Inquire More</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -1397,37 +1710,40 @@
                         <div class="course-overlay">
                             <div style="text-align: center;">
                                 <div style="font-size: 3rem; margin-bottom: 1rem;">💻</div>
-                                <h3 style="font-size: 1.5rem; font-weight: bold;">IT Department</h3>
+                                <h3 style="font-size: 1.5rem; font-weight: bold;" data-translate="itDept">IT Department</h3>
                             </div>
                         </div>
                     </div>
                     <div class="course-content">
-                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">IT Department</h3>
-                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">Build the technical skills demanded by today's rapidly evolving digital landscape.</p>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;" data-translate="itDept">IT Department</h3>
+                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;" data-translate="itDescription">Build the technical skills demanded by today's rapidly evolving digital landscape.</p>
                         
-                        <h4 style="font-weight: 600; margin-bottom: 1rem;">Courses Offered:</h4>
+                        <h4 style="font-weight: 600; margin-bottom: 1rem;" data-translate="coursesOffered">Courses Offered:</h4>
                         <div class="course-list">
                             <div class="course-item">
                                 <span>💻</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Full-Stack Web Development</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="fullStackDev">Full-Stack Web Development</span>
                             </div>
                             <div class="course-item">
                                 <span>📊</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Data Science & Analytics</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="dataScience">Data Science & Analytics</span>
                             </div>
                             <div class="course-item">
                                 <span>🛡️</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Cyber Security Fundamentals</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="cyberSecurity">Cyber Security Fundamentals</span>
                             </div>
                             <div class="course-item">
                                 <span>📱</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;">Mobile App Development</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="mobileAppDev">Mobile App Development</span>
                             </div>
                         </div>
                         
-                        <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20IT%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="width: 100%;">
-                            💻 Inquire About IT Courses
-                        </a>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="#application" class="btn btn-primary" style="flex: 1; min-width: 140px; animation: pulse-glow 2s infinite;"><span data-translate="applyNow">🎓 Apply Now</span></a>
+                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20IT%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="flex: 1; min-width: 140px;">
+                                <span data-translate="inquireIT">💻 Inquire More</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1438,9 +1754,9 @@
     <section id="methodology" class="section" style="background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted) / 0.3));">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Our Unique <span class="gradient-text">Teaching Methodology</span></h2>
+                <h2 class="section-title"><span data-translate="methodologyTitle">Our Unique <span class="gradient-text">Teaching Methodology</span></span></h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Our proven 4-step approach ensures comprehensive learning and career success</p>
+                <p class="section-subtitle" data-translate="methodologySubtitle">Our proven 4-step approach ensures comprehensive learning and career success</p>
             </div>
             
             <div class="grid grid-2">
@@ -1450,9 +1766,9 @@
                     <div style="position: relative; z-index: 2;">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #3b82f6, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">01</span>
-                            <h3 style="font-size: 1.25rem; font-weight: bold;">Foundational Knowledge</h3>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;" data-translate="foundationalKnowledge">Foundational Knowledge</h3>
                         </div>
-                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">We start with strong theoretical basics, ensuring every student understands the core concepts before diving into practical applications.</p>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="foundationalDesc">We start with strong theoretical basics, ensuring every student understands the core concepts before diving into practical applications.</p>
                     </div>
                 </div>
                 
@@ -1462,9 +1778,9 @@
                     <div style="position: relative; z-index: 2;">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #10b981, #047857); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">02</span>
-                            <h3 style="font-size: 1.25rem; font-weight: bold;">Hands-On Practical Training</h3>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;" data-translate="handsOnTraining">Hands-On Practical Training</h3>
                         </div>
-                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">Our courses emphasize active learning through real-world projects, coding challenges, and case studies, building practical skills.</p>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="handsOnDesc">Our courses emphasize active learning through real-world projects, coding challenges, and case studies, building practical skills.</p>
                     </div>
                 </div>
                 
@@ -1474,9 +1790,9 @@
                     <div style="position: relative; z-index: 2;">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #8b5cf6, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">03</span>
-                            <h3 style="font-size: 1.25rem; font-weight: bold;">Expert Mentorship & Feedback</h3>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;" data-translate="personalizedMentorship">Expert Mentorship & Feedback</h3>
                         </div>
-                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">Students receive personalized guidance from industry experts, with regular feedback sessions to refine their skills and understanding.</p>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="mentorshipDesc">Students receive personalized guidance from industry experts, with regular feedback sessions to refine their skills and understanding.</p>
                     </div>
                 </div>
                 
@@ -1486,9 +1802,9 @@
                     <div style="position: relative; z-index: 2;">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <span style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">04</span>
-                            <h3 style="font-size: 1.25rem; font-weight: bold;">Career Development & Support</h3>
+                            <h3 style="font-size: 1.25rem; font-weight: bold;" data-translate="careerPreparation">Career Development & Support</h3>
                         </div>
-                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">We provide robust career services, including resume building, interview preparation, and job placement assistance, ensuring a smooth transition into the workforce.</p>
+                        <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;" data-translate="careerDesc">We provide robust career services, including resume building, interview preparation, and job placement assistance, ensuring a smooth transition into the workforce.</p>
                     </div>
                 </div>
             </div>
@@ -1496,11 +1812,24 @@
             <!-- Bottom CTA -->
             <div class="animate-on-scroll" style="text-align: center; margin-top: 4rem;">
                 <div class="glass-effect" style="border-radius: 1rem; padding: 2rem; max-width: 600px; margin: 0 auto;">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ready to Start Your Learning Journey?</h3>
-                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">Experience our unique methodology and transform your career with hands-on, practical education.</p>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="readyLearningJourney">Ready to Start Your Learning Journey?</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;" data-translate="experienceMethodology">Experience our unique methodology and transform your career with hands-on, practical education.</p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="https://wa.me/250788244964" class="btn btn-primary" target="_blank">Apply Now</a>
-                        <a href="#courses" class="btn" style="border: 1px solid hsl(var(--primary)); color: hsl(var(--primary)); background: transparent;">Learn More</a>
+                        <div class="apply-button-container" style="position: relative; display: inline-block;">
+                            <button class="btn btn-primary apply-btn-main" style="animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                                <span data-translate="applyNow">🎓 Apply Now</span>
+                                <span style="margin-left: 0.5rem;">▼</span>
+                            </button>
+                            <div class="apply-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 200px;">
+                                <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                    <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                                </a>
+                                <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                    <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                                </a>
+                            </div>
+                        </div>
+                        <a href="#programs" class="btn" style="border: 1px solid hsl(var(--primary)); color: hsl(var(--primary)); background: transparent;">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -1511,9 +1840,9 @@
     <section id="testimonials" class="section">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2 class="section-title">What Our <span class="gradient-text">Students Say</span></h2>
+                <h2 class="section-title"><span data-translate="testimonialsTitle">What Our <span class="gradient-text">Students Say</span></span></h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Hear from our students</p>
+                <p class="section-subtitle" data-translate="testimonialsSubtitle">Hear from our students</p>
             </div>
             
             <!-- Video Section -->
@@ -1529,7 +1858,7 @@
                         <div class="video-placeholder">
                             <div class="video-content">
                                 <div class="play-button">▶</div>
-                                <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">Student Success Stories</h3>
+                                <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;" data-translate="studentSuccessStories">Student Success Stories</h3>
                                 <p style="opacity: 0.9;"></p>
                             </div>
                         </div>
@@ -1541,19 +1870,19 @@
             <div class="grid grid-4 animate-on-scroll" style="margin-top: 4rem;">
                 <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
                     <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">98%</div>
-                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Job Placement Rate</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));" data-translate="jobPlacementRate">Job Placement Rate</div>
                 </div>
                 <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
                     <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">4.9/5</div>
-                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Average Rating</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));" data-translate="averageRating">Average Rating</div>
                 </div>
                 <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
                     <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">1000+</div>
-                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Happy Graduates</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));" data-translate="happyGraduates">Happy Graduates</div>
                 </div>
                 <div class="glass-effect" style="text-align: center; border-radius: 1rem; padding: 1.5rem;">
                     <div style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" class="gradient-text">50+</div>
-                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">Partner Companies</div>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));" data-translate="partnerCompanies">Partner Companies</div>
                 </div>
             </div>
         </div>
@@ -1563,23 +1892,23 @@
     <section id="resources" class="section" style="background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted) / 0.3));">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Learning <span class="gradient-text">Resources</span></h2>
+                <h2 class="section-title"><span data-translate="resourcesTitle">Learning <span class="gradient-text">Resources</span></span></h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Access our comprehensive collection of learning materials and resources</p>
+                <p class="section-subtitle" data-translate="resourcesSubtitle">Access our comprehensive collection of learning materials and resources</p>
             </div>
             
             <!-- Featured Video Section -->
             <div style="margin-bottom: 4rem;">
                 <div class="card animate-on-scroll" style="max-width: 800px; margin: 0 auto;">
-                    <h3 style="text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Explore Our Learning Videos</h3>
-                    <p style="text-align: center; color: hsl(var(--muted-foreground)); margin-bottom: 2rem;">
+                    <h3 style="text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="exploreVideos">Explore Our Learning Videos</h3>
+                    <p style="text-align: center; color: hsl(var(--muted-foreground)); margin-bottom: 2rem;" data-translate="videosDescription">
                         Mosley explains how our language teaching system works - we are the hub of languages
                     </p>
                     <div class="video-placeholder" onclick="window.open('https://youtube.com/@loyaltraininghub?si=33mh4Oqg70XDfp0J', '_blank')">
                         <div class="video-content">
                             <div class="play-button">▶</div>
-                            <h4 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Language Teaching System Overview</h4>
-                            <p style="opacity: 0.9;">Click to watch on YouTube</p>
+                            <h4 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;" data-translate="systemOverview">Language Teaching System Overview</h4>
+                            <p style="opacity: 0.9;" data-translate="clickToWatch">Click to watch on YouTube</p>
                         </div>
                     </div>
                 </div>
@@ -1589,43 +1918,43 @@
             <div class="grid grid-4">
                 <div class="card animate-on-scroll" style="text-align: center;">
                     <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">🎥</div>
-                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Learning Videos</h3>
-                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Comprehensive video tutorials covering all course materials</p>
-                    <a href="https://youtube.com/@loyaltraininghub?si=33mh4Oqg70XDfp0J" class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;" target="_blank">Access Now</a>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="learningVideos">Learning Videos</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;" data-translate="videoTutorials">Comprehensive video tutorials covering all course materials</p>
+                    <a href="https://youtube.com/@loyaltraininghub?si=33mh4Oqg70XDfp0J" class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;" target="_blank" data-translate="accessNow">Access Now</a>
                 </div>
                 
                 <div class="card animate-on-scroll" style="text-align: center;">
                     <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">📚</div>
-                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Study Materials</h3>
-                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Downloadable resources, guides, and practice exercises</p>
-                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">Coming Soon</button>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="studyMaterials">Study Materials</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;" data-translate="downloadableResources">Downloadable resources, guides, and practice exercises</p>
+                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;" data-translate="comingSoon">Coming Soon</button>
                 </div>
                 
                 <div class="card animate-on-scroll" style="text-align: center;">
                     <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #10b981, #047857); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">🎧</div>
-                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Audio Lessons</h3>
-                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Listening exercises and pronunciation guides for language learners</p>
-                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">Coming Soon</button>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="audioLessons">Audio Lessons</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;" data-translate="listeningExercises">Listening exercises and pronunciation guides for language learners</p>
+                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;" data-translate="comingSoon">Coming Soon</button>
                 </div>
                 
                 <div class="card animate-on-scroll" style="text-align: center;">
                     <div style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1rem; font-size: 1.5rem;">📝</div>
-                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Assessment Tools</h3>
-                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;">Practice tests and skill evaluation resources</p>
-                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">Coming Soon</button>
+                    <h3 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="assessmentTools">Assessment Tools</h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; margin-bottom: 1rem;" data-translate="practiceTests">Practice tests and skill evaluation resources</p>
+                    <button class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;" data-translate="comingSoon">Coming Soon</button>
                 </div>
             </div>
             
             <!-- Skills Enhancement Section -->
             <div class="grid grid-2 animate-on-scroll" style="align-items: center; margin-top: 4rem;">
                 <div>
-                    <h3 style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem;" data-translate="enhanceSkills">
                         Enhance Your <span class="gradient-text">Skills</span>
                     </h3>
-                    <p style="color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;" data-translate="holisticApproach">
                         We believe in a holistic approach to education, combining theoretical knowledge with practical application. Our resources are designed to help you master essential skills crucial for any professional field.
                     </p>
-                    <p style="color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;">
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 1.1rem; line-height: 1.7;" data-translate="comprehensiveLibrary">
                         Whether you're learning a new language or developing technical skills, our comprehensive resource library supports your journey every step of the way.
                     </p>
                 </div>
@@ -1633,25 +1962,120 @@
                 <div class="grid grid-2" style="gap: 1rem;">
                     <div class="card" style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🗣️</div>
-                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Speaking</h4>
-                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Interactive speaking exercises and conversation practice</p>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="speaking">Speaking</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;" data-translate="speakingDesc">Interactive speaking exercises and conversation practice</p>
                     </div>
                     <div class="card" style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">👂</div>
-                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Listening</h4>
-                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Audio comprehension and active listening skills</p>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="listening">Listening</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;" data-translate="listeningDesc">Audio comprehension and active listening skills</p>
                     </div>
                     <div class="card" style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">✍️</div>
-                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Writing</h4>
-                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Structured writing practice and composition skills</p>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="writing">Writing</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;" data-translate="writingDesc">Structured writing practice and composition skills</p>
                     </div>
                     <div class="card" style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📖</div>
-                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">Reading</h4>
-                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">Reading comprehension and analytical skills</p>
+                        <h4 style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;" data-translate="reading">Reading</h4>
+                        <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;" data-translate="readingDesc">Reading comprehension and analytical skills</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section id="application" class="section" style="background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--accent) / 0.05));">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 5rem; height: 5rem; background: var(--gradient-hero); border-radius: 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="font-size: 2rem;">🎓</div>
+                </div>
+                <h2 class="section-title">
+                    <span data-translate="applicationTitle">Apply to <span class="gradient-text">Loyal Training Hub</span></span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-translate="applicationSubtitle">Take the first step towards transforming your career. Fill out our application form and join thousands of successful graduates.</p>
+            </div>
+            
+            <div class="card animate-on-scroll" style="max-width: 800px; margin: 0 auto; padding: 3rem;">
+                <form action="https://formspree.io/f/xblkbryo" method="POST" style="display: grid; gap: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="firstName">First Name *</label>
+                            <input type="text" name="firstName" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="middleName">Middle Name (Optional)</label>
+                            <input type="text" name="middleName" style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="lastName">Last Name *</label>
+                        <input type="text" name="lastName" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="emailAddress">Email Address *</label>
+                            <input type="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="phoneNumber">Phone Number *</label>
+                            <input type="tel" name="phone" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="currentAddress">Current Address *</label>
+                        <textarea name="address" required rows="3" style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground)); resize: vertical;"></textarea>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="countryOfOrigin">Country of Origin *</label>
+                            <input type="text" name="country" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="primaryLanguage">Your Primary Language *</label>
+                            <input type="text" name="language" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="selectCourse">Select Course *</label>
+                        <select name="course" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                            <option value="" data-translate="selectProgram">Select a program</option>
+                            <option value="english-language" data-translate="englishLanguage">English Language</option>
+                            <option value="french-language" data-translate="frenchLanguage">French Language</option>
+                            <option value="chinese-language" data-translate="chineseLanguage">Chinese Language</option>
+                            <option value="software-development" data-translate="softwareDevelopment">Software Development Program</option>
+                            <option value="ict-computer-software" data-translate="ictComputerSoftware">ICT and Computer Software</option>
+                            <option value="international-certification" data-translate="internationalCertification">International Language Certification</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="preferredStartDate">Preferred Start Date *</label>
+                        <input type="date" name="startDate" required style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: hsl(var(--foreground));" data-translate="admissionLetter">
+                            Do you want us to send you an admission letter now? If yes, upload ID/Passport. If no, skip it (Optional)
+                        </label>
+                        <input type="file" name="admissionLetter" accept=".pdf,.jpg,.jpeg,.png" style="width: 100%; padding: 0.75rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem; font-size: 1rem; background: hsl(var(--background)); color: hsl(var(--foreground));">
+                    </div>
+                    
+                    <div style="padding-top: 1.5rem;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <span data-translate="submitApplication">Submit Application</span>
+                            <span style="font-size: 1.25rem;">📝</span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -1660,41 +2084,41 @@
     <section id="contact" class="section">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Get In <span class="gradient-text">Touch With Us</span></h2>
+                <h2 class="section-title"><span data-translate="getInTouchTitle">Get In <span class="gradient-text">Touch With Us</span></span></h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Ready to start your learning journey? Contact us today and let's discuss your goals</p>
+                <p class="section-subtitle" data-translate="contactSectionSubtitle">Ready to start your learning journey? Contact us today and let's discuss your goals</p>
             </div>
             
             <div class="grid grid-2">
                 <!-- Contact Form -->
                 <div class="contact-form animate-on-scroll">
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Send Us a Message</h3>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;" data-translate="sendMessage">Send Us a Message</h3>
                     <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Your Name" required>
+                            <input type="text" class="form-input" data-translate-placeholder="yourName" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" placeholder="Your Email" required>
+                            <input type="email" class="form-input" data-translate-placeholder="yourEmail" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Subject" required>
+                            <input type="text" class="form-input" data-translate-placeholder="subject" placeholder="Subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-textarea" placeholder="Your Message" required></textarea>
+                            <textarea class="form-textarea" data-translate-placeholder="yourMessage" placeholder="Your Message" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-secondary" style="width: 100%;">Send Message</button>
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;" data-translate="sendMessageBtn">Send Message</button>
                     </form>
                 </div>
                 
                 <!-- Contact Information -->
                 <div class="animate-on-scroll">
                     <div class="contact-info" style="margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Contact Information</h3>
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;" data-translate="contactInformation">Contact Information</h3>
                         
                         <div class="contact-item">
                             <div class="contact-icon">📍</div>
                             <div>
-                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Address</h4>
+                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;" data-translate="address">Address</h4>
                                 <p style="color: hsl(var(--muted-foreground));">KG 15 Ave, Kigali, Rwanda</p>
                             </div>
                         </div>
@@ -1702,7 +2126,7 @@
                         <div class="contact-item">
                             <div class="contact-icon">📞</div>
                             <div>
-                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Phone</h4>
+                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;" data-translate="phone">Phone</h4>
                                 <a href="tel:+250788244964" style="color: hsl(var(--muted-foreground)); text-decoration: none;">+250 788 244 964</a>
                             </div>
                         </div>
@@ -1710,7 +2134,7 @@
                         <div class="contact-item">
                             <div class="contact-icon">✉️</div>
                             <div>
-                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Email</h4>
+                                <h4 style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;" data-translate="email">Email</h4>
                                 <a href="mailto:loyal.training.hub@gmail.com" style="color: hsl(var(--muted-foreground)); text-decoration: none;">loyal.training.hub@gmail.com</a>
                             </div>
                         </div>
@@ -1726,7 +2150,7 @@
                     
                     <!-- Social Media -->
                     <div class="contact-info" style="margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;">Follow Us</h3>
+                        <h3 style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;" data-translate="followUs">Follow Us</h3>
                         <div class="social-links">
                             <a href="https://web.facebook.com/profile.php?id=100086507744005" class="social-link" target="_blank">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -1758,15 +2182,15 @@
                     
                     <!-- Quick Contact -->
                     <div style="background: var(--gradient-hero); color: white; border-radius: 1rem; padding: 2rem; text-align: center;">
-                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem;">Ready to Start Learning?</h3>
-                        <p style="margin-bottom: 1.5rem; opacity: 0.95;">
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem;" data-translate="readyToStartLearning">Ready to Start Learning?</h3>
+                        <p style="margin-bottom: 1.5rem; opacity: 0.95;" data-translate="contactUsWhatsAppDesc">
                             Contact us directly via WhatsApp for instant support and enrollment assistance.
                         </p>
                         <a href="https://wa.me/250788244964" class="btn btn-outline" target="_blank" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                             </svg>
-                            Chat on WhatsApp
+                            <span data-translate="chatOnWhatsApp">Chat on WhatsApp</span>
                         </a>
                     </div>
                 </div>
@@ -1784,10 +2208,10 @@
                         <img src="https://i.imgur.com/uLLa9dm.png" alt="LTH Logo" style="width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover;" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23007bff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-weight=%22bold%22>LTH</text></svg>'">
                         <div>
                             <h3 style="font-size: 1.25rem; font-weight: bold; margin: 0;" class="gradient-text">Loyal Training Hub</h3>
-                            <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin: 0;">Empowering Futures</p>
+                            <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin: 0;" data-translate="empoweringFutures">Empowering Futures</p>
                         </div>
                     </div>
-                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6; margin-bottom: 1.5rem;">
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6; margin-bottom: 1.5rem;" data-translate="footerDescription">
                         Leading educational institution dedicated to fostering talent and driving career growth in Rwanda and beyond through practical, skill-focused training programs.
                     </p>
                     <div class="social-links">
@@ -1821,67 +2245,101 @@
                 
                 <!-- Quick Links -->
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-translate="quickLinks">Quick Links</h4>
                     <ul>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#courses">Courses</a></li>
-                        <li><a href="#methodology">Methodology</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about" data-translate="about">About Us</a></li>
+                        <li><a href="#courses" data-translate="courses">Courses</a></li>
+                        <li><a href="#methodology" data-translate="methodology">Methodology</a></li>
+                        <li><a href="#testimonials" data-translate="testimonials">Testimonials</a></li>
+                        <li><a href="#contact" data-translate="contact">Contact</a></li>
                     </ul>
                 </div>
                 
                 <!-- Popular Courses -->
                 <div class="footer-section">
-                    <h4>Popular Courses</h4>
+                    <h4 data-translate="popularCourses">Popular Courses</h4>
                     <ul>
-                        <li><a href="#courses">Web Development</a></li>
-                        <li><a href="#courses">Data Science</a></li>
-                        <li><a href="#courses">English Language</a></li>
-                        <li><a href="#courses">French Language</a></li>
-                        <li><a href="#courses">Mobile Development</a></li>
+                        <li><a href="#courses" data-translate="webDevelopment">Web Development</a></li>
+                        <li><a href="#courses" data-translate="dataScience">Data Science</a></li>
+                        <li><a href="#courses" data-translate="englishLanguage">English Language</a></li>
+                        <li><a href="#courses" data-translate="frenchLanguage">French Language</a></li>
+                        <li><a href="#courses" data-translate="mobileDevelopment">Mobile Development</a></li>
                     </ul>
                 </div>
                 
                 <!-- Contact Info -->
                 <div class="footer-section">
-                    <h4>Contact Info</h4>
+                    <h4 data-translate="contactInfo">Contact Info</h4>
                     <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem;">
                         <span style="color: hsl(var(--primary)); margin-top: 0.25rem;">📍</span>
                         <div>
-                            <p style="font-weight: 500; margin-bottom: 0.25rem;">Address</p>
+                            <p style="font-weight: 500; margin-bottom: 0.25rem;" data-translate="address">Address</p>
                             <p style="color: hsl(var(--muted-foreground)); font-size: 0.9rem;">KG 15 Ave, Kigali, Rwanda</p>
                         </div>
                     </div>
                     <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem;">
                         <span style="color: hsl(var(--primary)); margin-top: 0.25rem;">📞</span>
                         <div>
-                            <p style="font-weight: 500; margin-bottom: 0.25rem;">Phone</p>
+                            <p style="font-weight: 500; margin-bottom: 0.25rem;" data-translate="phone">Phone</p>
                             <a href="tel:+250788244964" style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; text-decoration: none;">+250 788 244 964</a>
                         </div>
                     </div>
                     <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
                         <span style="color: hsl(var(--primary)); margin-top: 0.25rem;">✉️</span>
                         <div>
-                            <p style="font-weight: 500; margin-bottom: 0.25rem;">Email</p>
+                            <p style="font-weight: 500; margin-bottom: 0.25rem;" data-translate="email">Email</p>
                             <a href="mailto:loyal.training.hub@gmail.com" style="color: hsl(var(--muted-foreground)); font-size: 0.9rem; text-decoration: none;">loyal.training.hub@gmail.com</a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- WhatsApp CTA -->
-            <div style="background: var(--gradient-hero); border-radius: 1rem; padding: 2rem; margin: 2rem 0; color: white;">
-                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;">
-                    <div>
-                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Ready to Start Your Learning Journey?</h3>
-                        <p style="opacity: 0.95; margin: 0;">Contact us today and let's discuss your goals!</p>
+            <!-- Apply Now CTA -->
+            <div style="background: var(--gradient-hero); border-radius: 1rem; padding: 2.5rem; margin: 2rem 0; color: white; text-align: center;">
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="readyToStart">Ready to Start Your Learning Journey?</h3>
+                    <p style="opacity: 0.95; margin: 0; font-size: 1.1rem;" data-translate="contactUs">Transform your career with our hands-on training programs!</p>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <div class="apply-button-container" style="position: relative; display: inline-block;">
+                        <button class="btn btn-outline apply-btn-main" style="font-size: 1.1rem; padding: 1rem 2rem; animation: pulse-glow 2s infinite; background: white; color: hsl(var(--primary)); border: 2px solid white;" onclick="toggleApplyDropdown(this)">
+                            <span data-translate="applyNow">🎓 Apply Now</span>
+                            <span style="margin-left: 0.5rem;">▼</span>
+                        </button>
+                        <div class="apply-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 200px;">
+                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                            </a>
+                            <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                            </a>
+                        </div>
+                    </div>
+                    <div class="donate-button-container" style="position: relative; display: inline-block;">
+                        <button class="btn btn-outline donate-btn-main" style="font-size: 1rem; padding: 0.875rem 1.75rem; animation: pulse-secondary 3s infinite;" onclick="toggleDonateDropdown(this)">
+                            <span data-translate="donateNow">💝 Support Education</span>
+                            <span style="margin-left: 0.5rem;">▼</span>
+                        </button>
+                        <div class="donate-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 320px;">
+                            <div style="padding: 1rem; border-bottom: 1px solid hsl(var(--border));">
+                                <h4 style="font-weight: bold; margin-bottom: 0.5rem; color: hsl(var(--primary)); font-size: 0.9rem;">💳 Bank Transfer</h4>
+                                <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground)); line-height: 1.4;">
+                                    <p style="margin: 0.25rem 0;"><strong>Swift Code:</strong> EQBL RW RW</p>
+                                    <p style="margin: 0.25rem 0;"><strong>Account Name:</strong> LOYAL TRAINING HUB LTD</p>
+                                    <p style="margin: 0.25rem 0;"><strong>Account Number:</strong> 4013200912230</p>
+                                    <p style="margin: 0.25rem 0;"><strong>Currency:</strong> RWANDAN FRANCS</p>
+                                </div>
+                            </div>
+                            <a href="tel:0782407285" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;">
+                                <span style="margin-right: 0.5rem;">📱</span>MTN Mobile Money: 0782407285
+                            </a>
+                        </div>
                     </div>
                     <a href="https://wa.me/250788244964" class="btn btn-outline" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                         </svg>
-                        WhatsApp Us Now
+                        <span data-translate="whatsappUs">WhatsApp Us</span>
                     </a>
                 </div>
             </div>
@@ -1890,13 +2348,13 @@
             <div class="footer-bottom">
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
                     <div style="text-align: center;">
-                        <p style="margin-bottom: 0.5rem;">© 2024 Loyal Training Hub Ltd. All rights reserved.</p>
-                        <p style="font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.25rem;">
+                        <p style="margin-bottom: 0.5rem;" data-translate="allRightsReserved">© 2024 Loyal Training Hub Ltd. All rights reserved.</p>
+                        <p style="font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.25rem;" data-translate="madeWith">
                             Made with ❤️ by Ibrix digital
                         </p>
                     </div>
                     <button onclick="scrollToTop()" class="btn" style="border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); background: transparent; font-size: 0.9rem;">
-                        ⬆️ Back to Top
+                        <span data-translate="backToTop">⬆️ Back to Top</span>
                     </button>
                 </div>
             </div>
@@ -2057,8 +2515,585 @@
             });
         });
 
+        // Language Switching Functionality
+        const translations = {
+            en: {
+                // Navigation
+                home: 'Home',
+                lthAdmission: 'LTH Admission',
+                studyAtLth: 'Study at LTH',
+                about: 'About Us',
+                programs: 'Programs',
+                courses: 'Courses',
+                contact: 'Contact Us',
+                methodology: 'Methodology',
+                testimonials: 'Testimonials',
+                resources: 'Resources',
+                getStarted: 'Get Started',
+                applyNow: 'Apply Now',
+                donateNow: 'Donate Now',
+                
+                // Hero Section
+                heroTitle: 'Unlock Your Professional and Academic Potential',
+                heroSubtitle: 'with Loyal Training Hub',
+                heroDescription: 'At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more.',
+                exploreCourses: '📚 Explore Our Courses',
+                getInTouch: '👥 Get in Touch',
+                
+                // Stats
+                learnersEmpowered: 'Learners Empowered',
+                certifiedTrainers: 'Certified Trainers',
+                skillImprovement: 'Skill Improvement',
+                corporatePartners: 'Corporate Partners',
+                
+                // About Section
+                aboutTitle: 'About Loyal Training Hub',
+                aboutDescription1: 'At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more, empowering you to communicate with confidence and fluency.',
+                aboutDescription2: 'At Loyal Training Hub, we believe that practical, hands-on learning experiences are the most effective way to develop professional skills. Our training programs combine theoretical knowledge with real-world applications, ensuring that you\'re not just learning concepts, but developing the ability to apply them in your career.',
+                
+                // Features
+                flexibleSchedules: 'Flexible Schedules',
+                flexibleSchedulesDesc: 'Learn at your own pace with our flexible scheduling options',
+                experiencedTrainers: 'Experienced Trainers',
+                experiencedTrainersDesc: 'Learn from instructors with real-world expertise in their fields',
+                modernLearning: 'Modern Learning',
+                modernLearningDesc: 'State-of-the-art facilities and contemporary teaching methods',
+                affordablePricing: 'Affordable Pricing',
+                affordablePricingDesc: 'Competitive rates with flexible installment payment plans',
+                noFixedIntakes: 'No Fixed Intakes',
+                noFixedIntakesDesc: 'Start immediately after your placement test - no waiting periods',
+                provenImpact: 'Proven Impact',
+                provenImpactDesc: 'Over 2,500 learners empowered both locally and internationally',
+                
+                // Unique Section
+                uniqueTitle: 'What Makes Loyal Training Hub Unique?',
+                uniqueDescription1: 'At Loyal Training Hub (LTH), we believe the best learning happens through hands-on, real-world experiences. That\'s why we go beyond theory by integrating practical sessions and self-directed projects into every program we offer, whether it\'s language mastery or software training.',
+                uniqueDescription2: 'Our students don\'t just learn; they do. From building websites, designing digital products, and analyzing real datasets, to practicing public speaking, engaging in role plays, and preparing for international exams like IELTS, TOEFL, DELF, and TEF, everything is designed to build confidence, proficiency, and practical job skills.',
+                ourMission: 'Our Mission',
+                missionDescription: 'This approach makes our courses truly job-ready. By the time our students complete the training period, they are not only certified, they are prepared to step directly into fulfilling careers or higher academic opportunities.',
+                missionQuote: '"At LTH, you don\'t just earn a certificate, you become capable, confident, and career-ready."',
+                applyNow: '🎯 Apply Now',
+                
+                // LTH Admission Section
+                admissionTitle: 'Admission to Loyal Training Hub',
+                admissionSubtitle: 'Learn about our admission process and requirements for various training programs.',
+                trainingPrograms: 'Our Training Programs',
+                trainingProgramsDesc: 'Explore our range of specialized programs designed to enhance your skills and advance your career.',
+                softwareDevelopment: 'Software Development Program',
+                softwareDevelopmentDesc: 'Master the latest programming languages, frameworks, and tools to develop robust software applications. Our comprehensive curriculum covers front-end and back-end development, database management, and software architecture.',
+                languageProficiency: 'Language Proficiency Program',
+                languageProficiencyDesc: 'Develop fluency in English, French, Chinese, or other languages through our immersive language programs. Our expert instructors use proven methodologies to help you achieve conversational and professional proficiency within a set timeframe.',
+                ictComputerSoftware: 'ICT and Computer Software',
+                ictComputerSoftwareDesc: 'Build essential skills in computer software including ArchiCAD, Revit, Microsoft Project Management, SolidWorks, Adobe Photoshop, Illustrator, and more. Our hands-on approach ensures you gain practical experience with industry-standard tools.',
+                internationalCertification: 'International Language Certification Program',
+                internationalCertificationDesc: 'This program prepares you to obtain internationally recognized language certificates such as the DELF for French, TOEFL or IELTS for English, DELE for Spanish. Whether you want to enhance your language skills or validate your proficiency level, this course offers certification opportunities in multiple languages. Get ready to take certification exams and expand your professional and academic horizons.',
+                learningExperience: 'The Loyal Training Hub Learning Experience',
+                learningByDoing: 'Learning by Doing',
+                learningByDoingDesc: 'Our students learn through real-world projects, internships, and hands-on experiences that prepare them for the workplace.',
+                realWorldExposure: 'Get Real-World Exposure',
+                realWorldExposureDesc: 'We immerse our students in situations where they can use their skill. Speaking with native speakers or join conversation groups, improving public speaking through practice in front of a big audience.',
+                globalPerspective: 'Global Perspective',
+                globalPerspectiveDesc: 'Our diverse student body and faculty bring global perspectives to the classroom, preparing students for a connected world.',
+                readyToJoin: 'Ready to Join Loyal Training Hub?',
+                readyToJoinDesc: 'Take the first step towards a transformative education that will prepare you for a meaningful career and Get Real-World Exposure.',
+                
+                // Study at LTH Section
+                studyAtLthTitle: 'What makes Loyal Training Hub Unique?',
+                studyAtLthDesc1: 'At Loyal Training Hub (LTH), we believe the best learning happens through hands-on, real-world experiences. That\'s why we go beyond theory by integrating practical sessions and self-directed projects into every program we offer, whether it\'s language mastery or software training.',
+                studyAtLthDesc2: 'Our students don\'t just learn; they do. From building websites, designing digital products, and analyzing real datasets, to practicing public speaking, engaging in role plays, and preparing for international exams like IELTS, TOEFL, DELF, and TEF, everything is designed to build confidence, proficiency, and practical job skills.',
+                studyAtLthDesc3: 'This approach makes our courses truly job-ready. By the time our students complete the training period, they are not only certified, they are prepared to step directly into fulfilling careers or higher academic opportunities. Whether you\'re pursuing English, French, Chinese, Swahili, or tech skills, you\'ll find our programs built around experience, relevance, and real results. At LTH, you don\'t just earn a certificate, you become capable, confident, and career-ready.',
+                studentsAtLth: 'Students at LTH',
+                studentsAtLthDesc: 'Learning through hands-on experience and practical application',
+                provenSuccess: 'Proven Success at Loyal Training Hub (LTH)',
+                provenSuccessDesc: 'At Loyal Training Hub (LTH), we believe the best learning happens through hands-on, real-world experiences. That\'s why we go beyond theory by integrating practical sessions and self-directed projects into every program we offer, whether it\'s language mastery or software training.',
+                didYouKnow: 'Did you know?',
+                graduateSuccess: 'of our graduates are employed or have started their own businesses within just 3 months after they have completed the training.',
+                realWorldImpact: 'This reflects the real-world impact of our programs in both software training and language mastery, empowering learners to seize job opportunities or launch entrepreneurial ventures with confidence. From mastering English, French, Chinese, and other key languages to gaining practical skills in software development, graphic design, digital marketing, and data analysis, our graduates walk away with the tools and mindset needed for success.',
+                lthPromise: 'At LTH, you\'re not just learning, you\'re preparing for a thriving future.',
+                
+                // Application Form
+                applicationTitle: 'Apply to Loyal Training Hub',
+                applicationSubtitle: 'Take the first step towards transforming your career. Fill out our application form and join thousands of successful graduates.',
+                firstName: 'First Name *',
+                middleName: 'Middle Name (Optional)',
+                lastName: 'Last Name *',
+                emailAddress: 'Email Address *',
+                phoneNumber: 'Phone Number *',
+                currentAddress: 'Current Address *',
+                countryOfOrigin: 'Country of Origin *',
+                primaryLanguage: 'Your Primary Language *',
+                selectCourse: 'Select Course *',
+                selectProgram: 'Select a program',
+                englishLanguage: 'English Language',
+                frenchLanguage: 'French Language',
+                chineseLanguage: 'Chinese Language',
+                preferredStartDate: 'Preferred Start Date *',
+                admissionLetter: 'Do you want us to send you an admission letter now? If yes, upload ID/Passport. If no, skip it (Optional)',
+                submitApplication: 'Submit Application',
+                
+                // Courses
+                programsTitle: 'Our Programs',
+                programsSubtitle: 'Choose from our comprehensive range of programs designed to accelerate your career growth',
+                coursesTitle: 'Our Popular Courses',
+                coursesSubtitle: 'Choose from our comprehensive range of courses designed to accelerate your career growth',
+                
+                // Languages Department
+                languagesDept: 'Languages Department',
+                languagesDescription: 'Unlock global opportunities by mastering new languages with our expert instructors.',
+                coursesOffered: 'Courses Offered:',
+                swahili: 'Swahili',
+                english: 'English',
+                french: 'French',
+                kinyarwanda: 'Kinyarwanda',
+                chinese: 'Chinese',
+                dutch: 'Dutch',
+                inquireLanguages: '💬 Inquire About Language Courses',
+                
+                // IT Department
+                itDept: 'IT Department',
+                itDescription: 'Build the technical skills demanded by today\'s rapidly evolving digital landscape.',
+                fullStackDev: 'Full-Stack Web Development',
+                dataScience: 'Data Science & Analytics',
+                cyberSecurity: 'Cyber Security Fundamentals',
+                mobileAppDev: 'Mobile App Development',
+                inquireIT: '💻 Inquire About IT Courses',
+                
+                // Methodology
+                methodologyTitle: 'Our Unique Teaching Methodology',
+                methodologySubtitle: 'Our proven 4-step approach ensures comprehensive learning and career success',
+                foundationalKnowledge: 'Foundational Knowledge',
+                foundationalDesc: 'We start with strong theoretical basics, ensuring every student understands the core concepts before diving into practical applications.',
+                handsOnTraining: 'Hands-On Practical Training',
+                handsOnDesc: 'Our courses emphasize active learning through real-world projects, coding challenges, and case studies, building practical skills.',
+                personalizedMentorship: 'Personalized Mentorship',
+                mentorshipDesc: 'Students receive personalized guidance from industry experts, with regular feedback sessions to refine their skills and understanding.',
+                careerPreparation: 'Career Preparation',
+                careerDesc: 'We provide robust career services, including resume building, interview preparation, and job placement assistance, ensuring a smooth transition into the workforce.',
+                readyLearningJourney: 'Ready to Start Your Learning Journey?',
+                experienceMethodology: 'Experience our unique methodology and transform your career with hands-on, practical education.',
+                
+                // Testimonials
+                testimonialsTitle: 'What Our Students Say',
+                testimonialsSubtitle: 'Hear from our students',
+                studentSuccessStories: 'Student Success Stories',
+                jobPlacementRate: 'Job Placement Rate',
+                averageRating: 'Average Rating',
+                happyGraduates: 'Happy Graduates',
+                partnerCompanies: 'Partner Companies',
+                
+                // Resources
+                resourcesTitle: 'Learning Resources',
+                resourcesSubtitle: 'Access our comprehensive collection of learning materials and resources',
+                exploreVideos: 'Explore Our Learning Videos',
+                videosDescription: 'Mosley explains how our language teaching system works - we are the hub of languages',
+                systemOverview: 'Language Teaching System Overview',
+                clickToWatch: 'Click to watch on YouTube',
+                learningVideos: 'Learning Videos',
+                videoTutorials: 'Comprehensive video tutorials covering all course materials',
+                accessNow: 'Access Now',
+                studyMaterials: 'Study Materials',
+                downloadableResources: 'Downloadable resources, guides, and practice exercises',
+                audioLessons: 'Audio Lessons',
+                listeningExercises: 'Listening exercises and pronunciation guides for language learners',
+                assessmentTools: 'Assessment Tools',
+                practiceTests: 'Practice tests and skill evaluation resources',
+                comingSoon: 'Coming Soon',
+                enhanceSkills: 'Enhance Your Skills',
+                holisticApproach: 'We believe in a holistic approach to education, combining theoretical knowledge with practical application. Our resources are designed to help you master essential skills crucial for any professional field.',
+                comprehensiveLibrary: 'Whether you\'re learning a new language or developing technical skills, our comprehensive resource library supports your journey every step of the way.',
+                
+                // Language Skills
+                speaking: 'Speaking',
+                speakingDesc: 'Interactive speaking exercises and conversation practice',
+                listening: 'Listening',
+                listeningDesc: 'Audio comprehension and active listening skills',
+                writing: 'Writing',
+                writingDesc: 'Structured writing practice and composition skills',
+                reading: 'Reading',
+                readingDesc: 'Reading comprehension and analytical skills',
+                
+                // Contact and Social
+                followUs: 'Follow Us',
+                readyToStartLearning: 'Ready to Start Learning?',
+                contactUsWhatsAppDesc: 'Contact us directly via WhatsApp for instant support and enrollment assistance.',
+                
+                // Contact Section
+                getInTouchTitle: 'Get In Touch With Us',
+                contactSectionSubtitle: 'Ready to start your learning journey? Contact us today and let\'s discuss your goals',
+                sendMessage: 'Send Us a Message',
+                yourName: 'Your Name',
+                yourEmail: 'Your Email',
+                subject: 'Subject',
+                yourMessage: 'Your Message',
+                sendMessageBtn: 'Send Message',
+                contactInformation: 'Contact Information',
+                chatOnWhatsApp: 'Chat on WhatsApp',
+                
+                // Footer
+                footerDescription: 'Leading educational institution dedicated to fostering talent and driving career growth in Rwanda and beyond through practical, skill-focused training programs.',
+                quickLinks: 'Quick Links',
+                popularCourses: 'Popular Courses',
+                contactInfo: 'Contact Info',
+                address: 'Address',
+                phone: 'Phone',
+                email: 'Email',
+                webDevelopment: 'Web Development',
+                englishLanguage: 'English Language',
+                frenchLanguage: 'French Language',
+                mobileDevelopment: 'Mobile Development',
+                
+                // Contact & Footer
+                readyToStart: 'Ready to Start Your Learning Journey?',
+                contactUs: 'Contact us today and let\'s discuss your goals!',
+                whatsappUs: 'WhatsApp Us Now',
+                backToTop: '⬆️ Back to Top',
+                allRightsReserved: '© 2024 Loyal Training Hub Ltd. All rights reserved.',
+                madeWith: 'Made with ❤️ by Ibrix digital',
+                
+                // Common
+                empoweringFutures: 'Empowering Futures'
+            },
+            fr: {
+                // Navigation
+                home: 'Accueil',
+                lthAdmission: 'Admission LTH',
+                studyAtLth: 'Étudier à LTH',
+                about: 'À Propos',
+                programs: 'Programmes',
+                courses: 'Cours',
+                contact: 'Contact',
+                methodology: 'Méthodologie',
+                testimonials: 'Témoignages',
+                resources: 'Ressources',
+                getStarted: 'Commencer',
+                applyNow: 'Postuler Maintenant',
+                donateNow: 'Faire un Don',
+                
+                // Hero Section
+                heroTitle: 'Libérez Votre Potentiel Professionnel et Académique',
+                heroSubtitle: 'avec Loyal Training Hub',
+                heroDescription: 'Chez Loyal Training Hub, nous vous équipons de compétences essentielles en logiciels informatiques comme ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, et plus encore pour améliorer votre croissance professionnelle. Nous améliorons également votre maîtrise des langues en anglais, français, chinois, et plus encore.',
+                exploreCourses: '📚 Explorez Nos Cours',
+                getInTouch: '👥 Contactez-Nous',
+                
+                // Stats
+                learnersEmpowered: 'Apprenants Formés',
+                certifiedTrainers: 'Formateurs Certifiés',
+                skillImprovement: 'Amélioration des Compétences',
+                corporatePartners: 'Partenaires Corporatifs',
+                
+                // About Section
+                aboutTitle: 'À Propos de Loyal Training Hub',
+                aboutDescription1: 'Chez Loyal Training Hub, nous vous équipons de compétences essentielles en logiciels informatiques comme ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, et plus encore pour améliorer votre croissance professionnelle. Nous améliorons également votre maîtrise des langues en anglais, français, chinois, et plus encore, vous permettant de communiquer avec confiance et fluidité.',
+                aboutDescription2: 'Chez Loyal Training Hub, nous croyons que les expériences d\'apprentissage pratiques et concrètes sont le moyen le plus efficace de développer les compétences professionnelles. Nos programmes de formation combinent les connaissances théoriques avec des applications du monde réel, vous assurant que vous n\'apprenez pas seulement des concepts, mais que vous développez la capacité de les appliquer dans votre carrière.',
+                
+                // LTH Admission Section
+                admissionTitle: 'Admission à Loyal Training Hub',
+                admissionSubtitle: 'Découvrez notre processus d\'admission et les exigences pour nos divers programmes de formation.',
+                trainingPrograms: 'Nos Programmes de Formation',
+                trainingProgramsDesc: 'Explorez notre gamme de programmes spécialisés conçus pour améliorer vos compétences et faire progresser votre carrière.',
+                softwareDevelopment: 'Programme de Développement Logiciel',
+                softwareDevelopmentDesc: 'Maîtrisez les derniers langages de programmation, frameworks et outils pour développer des applications logicielles robustes. Notre curriculum complet couvre le développement front-end et back-end, la gestion de bases de données et l\'architecture logicielle.',
+                languageProficiency: 'Programme de Maîtrise Linguistique',
+                languageProficiencyDesc: 'Développez la fluidité en anglais, français, chinois ou d\'autres langues grâce à nos programmes linguistiques immersifs. Nos instructeurs experts utilisent des méthodologies éprouvées pour vous aider à atteindre une maîtrise conversationnelle et professionnelle dans un délai défini.',
+                ictComputerSoftware: 'TIC et Logiciels Informatiques',
+                ictComputerSoftwareDesc: 'Développez des compétences essentielles en logiciels informatiques incluant ArchiCAD, Revit, Microsoft Project Management, SolidWorks, Adobe Photoshop, Illustrator, et plus. Notre approche pratique vous assure une expérience pratique avec les outils standards de l\'industrie.',
+                internationalCertification: 'Programme de Certification Linguistique Internationale',
+                internationalCertificationDesc: 'Ce programme vous prépare à obtenir des certificats linguistiques reconnus internationalement tels que le DELF pour le français, TOEFL ou IELTS pour l\'anglais, DELE pour l\'espagnol. Que vous souhaitiez améliorer vos compétences linguistiques ou valider votre niveau de maîtrise, ce cours offre des opportunités de certification dans plusieurs langues. Préparez-vous à passer les examens de certification et élargissez vos horizons professionnels et académiques.',
+                learningExperience: 'L\'Expérience d\'Apprentissage de Loyal Training Hub',
+                learningByDoing: 'Apprendre en Faisant',
+                learningByDoingDesc: 'Nos étudiants apprennent par des projets du monde réel, des stages et des expériences pratiques qui les préparent au milieu de travail.',
+                realWorldExposure: 'Obtenir une Exposition au Monde Réel',
+                realWorldExposureDesc: 'Nous immergeons nos étudiants dans des situations où ils peuvent utiliser leurs compétences. Parler avec des locuteurs natifs ou rejoindre des groupes de conversation, améliorer la prise de parole en public par la pratique devant un grand public.',
+                globalPerspective: 'Perspective Globale',
+                globalPerspectiveDesc: 'Notre corps étudiant et notre faculté diversifiés apportent des perspectives globales en classe, préparant les étudiants pour un monde connecté.',
+                readyToJoin: 'Prêt à Rejoindre Loyal Training Hub?',
+                readyToJoinDesc: 'Franchissez la première étape vers une éducation transformatrice qui vous préparera pour une carrière significative et obtenez une exposition au monde réel.',
+                
+                // Study at LTH Section
+                studyAtLthTitle: 'Ce qui rend Loyal Training Hub Unique?',
+                studyAtLthDesc1: 'Chez Loyal Training Hub (LTH), nous croyons que le meilleur apprentissage se fait par des expériences pratiques et du monde réel. C\'est pourquoi nous allons au-delà de la théorie en intégrant des sessions pratiques et des projets auto-dirigés dans chaque programme que nous offrons, qu\'il s\'agisse de maîtrise linguistique ou de formation logicielle.',
+                studyAtLthDesc2: 'Nos étudiants n\'apprennent pas seulement; ils font. De la construction de sites web, à la conception de produits numériques, et l\'analyse de données réelles, à la pratique de la prise de parole en public, l\'engagement dans des jeux de rôle, et la préparation aux examens internationaux comme IELTS, TOEFL, DELF, et TEF, tout est conçu pour construire la confiance, la compétence, et les compétences pratiques de travail.',
+                studyAtLthDesc3: 'Cette approche rend nos cours vraiment prêts pour l\'emploi. Au moment où nos étudiants terminent la période de formation, ils ne sont pas seulement certifiés, ils sont préparés à entrer directement dans des carrières épanouissantes ou des opportunités académiques supérieures. Que vous poursuiviez l\'anglais, le français, le chinois, le swahili, ou les compétences techniques, vous trouverez nos programmes construits autour de l\'expérience, de la pertinence, et des résultats réels. Chez LTH, vous n\'obtenez pas seulement un certificat, vous devenez capable, confiant, et prêt pour la carrière.',
+                studentsAtLth: 'Étudiants à LTH',
+                studentsAtLthDesc: 'Apprendre par l\'expérience pratique et l\'application pratique',
+                provenSuccess: 'Succès Prouvé à Loyal Training Hub (LTH)',
+                provenSuccessDesc: 'Chez Loyal Training Hub (LTH), nous croyons que le meilleur apprentissage se fait par des expériences pratiques et du monde réel. C\'est pourquoi nous allons au-delà de la théorie en intégrant des sessions pratiques et des projets auto-dirigés dans chaque programme que nous offrons, qu\'il s\'agisse de maîtrise linguistique ou de formation logicielle.',
+                didYouKnow: 'Saviez-vous que?',
+                graduateSuccess: 'de nos diplômés sont employés ou ont lancé leurs propres entreprises dans les 3 mois suivant l\'achèvement de la formation.',
+                realWorldImpact: 'Cela reflète l\'impact du monde réel de nos programmes dans la formation logicielle et la maîtrise linguistique, permettant aux apprenants de saisir les opportunités d\'emploi ou de lancer des entreprises entrepreneuriales avec confiance. De la maîtrise de l\'anglais, du français, du chinois, et d\'autres langues clés à l\'acquisition de compétences pratiques en développement logiciel, design graphique, marketing numérique, et analyse de données, nos diplômés repartent avec les outils et l\'état d\'esprit nécessaires au succès.',
+                lthPromise: 'Chez LTH, vous n\'apprenez pas seulement, vous vous préparez pour un avenir prospère.',
+                
+                // Application Form
+                applicationTitle: 'Postuler à Loyal Training Hub',
+                applicationSubtitle: 'Franchissez la première étape vers la transformation de votre carrière. Remplissez notre formulaire de candidature et rejoignez des milliers de diplômés réussis.',
+                firstName: 'Prénom *',
+                middleName: 'Deuxième Prénom (Optionnel)',
+                lastName: 'Nom de Famille *',
+                emailAddress: 'Adresse Email *',
+                phoneNumber: 'Numéro de Téléphone *',
+                currentAddress: 'Adresse Actuelle *',
+                countryOfOrigin: 'Pays d\'Origine *',
+                primaryLanguage: 'Votre Langue Principale *',
+                selectCourse: 'Sélectionner un Cours *',
+                selectProgram: 'Sélectionner un programme',
+                englishLanguage: 'Langue Anglaise',
+                frenchLanguage: 'Langue Française',
+                chineseLanguage: 'Langue Chinoise',
+                preferredStartDate: 'Date de Début Préférée *',
+                admissionLetter: 'Voulez-vous que nous vous envoyions une lettre d\'admission maintenant? Si oui, téléchargez ID/Passeport. Si non, ignorez (Optionnel)',
+                submitApplication: 'Soumettre la Candidature',
+                
+                // Programs
+                programsTitle: 'Nos Programmes',
+                programsSubtitle: 'Choisissez parmi notre gamme complète de programmes conçus pour accélérer votre croissance de carrière',
+                
+                // Features
+                flexibleSchedules: 'Horaires Flexibles',
+                flexibleSchedulesDesc: 'Apprenez à votre rythme avec nos options d\'horaires flexibles',
+                experiencedTrainers: 'Formateurs Expérimentés',
+                experiencedTrainersDesc: 'Apprenez avec des instructeurs ayant une expertise du monde réel dans leurs domaines',
+                modernLearning: 'Apprentissage Moderne',
+                modernLearningDesc: 'Installations de pointe et méthodes d\'enseignement contemporaines',
+                affordablePricing: 'Prix Abordables',
+                affordablePricingDesc: 'Tarifs compétitifs avec des plans de paiement échelonnés flexibles',
+                noFixedIntakes: 'Pas d\'Admissions Fixes',
+                noFixedIntakesDesc: 'Commencez immédiatement après votre test de placement - aucune période d\'attente',
+                provenImpact: 'Impact Prouvé',
+                provenImpactDesc: 'Plus de 2 500 apprenants formés localement et internationalement',
+                
+                // Unique Section
+                uniqueTitle: 'Ce Qui Rend Loyal Training Hub Unique?',
+                uniqueDescription1: 'Chez Loyal Training Hub (LTH), nous croyons que le meilleur apprentissage se fait à travers des expériences pratiques et concrètes. C\'est pourquoi nous allons au-delà de la théorie en intégrant des sessions pratiques et des projets autodirigés dans chaque programme que nous offrons, qu\'il s\'agisse de maîtrise linguistique ou de formation logicielle.',
+                uniqueDescription2: 'Nos étudiants n\'apprennent pas seulement ; ils font. De la création de sites web, à la conception de produits numériques, en passant par l\'analyse de vrais ensembles de données, la pratique de la prise de parole en public, l\'engagement dans des jeux de rôle, et la préparation aux examens internationaux comme IELTS, TOEFL, DELF, et TEF, tout est conçu pour développer la confiance, la compétence et les compétences professionnelles pratiques.',
+                ourMission: 'Notre Mission',
+                missionDescription: 'Cette approche rend nos cours vraiment prêts pour l\'emploi. Au moment où nos étudiants terminent la période de formation, ils ne sont pas seulement certifiés, ils sont préparés à entrer directement dans des carrières enrichissantes ou des opportunités académiques supérieures.',
+                missionQuote: '"Chez LTH, vous n\'obtenez pas seulement un certificat, vous devenez capable, confiant et prêt pour votre carrière."',
+                applyNow: '🎯 Postulez Maintenant',
+                
+                // Courses
+                coursesTitle: 'Nos Cours Populaires',
+                coursesSubtitle: 'Choisissez parmi notre gamme complète de cours conçus pour accélérer votre croissance de carrière',
+                
+                // Languages Department
+                languagesDept: 'Département des Langues',
+                languagesDescription: 'Débloquez des opportunités mondiales en maîtrisant de nouvelles langues avec nos instructeurs experts.',
+                coursesOffered: 'Cours Offerts:',
+                swahili: 'Swahili',
+                english: 'Anglais',
+                french: 'Français',
+                kinyarwanda: 'Kinyarwanda',
+                chinese: 'Chinois',
+                dutch: 'Néerlandais',
+                inquireLanguages: '💬 Renseignez-vous sur les Cours de Langues',
+                
+                // IT Department
+                itDept: 'Département IT',
+                itDescription: 'Développez les compétences techniques demandées par le paysage numérique en évolution rapide d\'aujourd\'hui.',
+                fullStackDev: 'Développement Web Full-Stack',
+                dataScience: 'Science des Données et Analytique',
+                cyberSecurity: 'Fondamentaux de la Cybersécurité',
+                mobileAppDev: 'Développement d\'Applications Mobiles',
+                inquireIT: '💻 Renseignez-vous sur les Cours IT',
+                
+                // Methodology
+                methodologyTitle: 'Notre Méthodologie d\'Enseignement Unique',
+                methodologySubtitle: 'Notre approche en 4 étapes éprouvée garantit un apprentissage complet et le succès professionnel',
+                foundationalKnowledge: 'Connaissances Fondamentales',
+                foundationalDesc: 'Nous commençons par des bases théoriques solides, en nous assurant que chaque étudiant comprend les concepts fondamentaux avant de plonger dans les applications pratiques.',
+                handsOnTraining: 'Formation Pratique',
+                handsOnDesc: 'Nos cours mettent l\'accent sur l\'apprentissage actif à travers des projets du monde réel, des défis de codage et des études de cas, développant des compétences pratiques.',
+                personalizedMentorship: 'Mentorat Personnalisé',
+                mentorshipDesc: 'Les étudiants reçoivent des conseils personnalisés d\'experts de l\'industrie, avec des sessions de feedback régulières pour affiner leurs compétences et leur compréhension.',
+                careerPreparation: 'Préparation de Carrière',
+                careerDesc: 'Nous fournissons des services de carrière robustes, y compris la rédaction de CV, la préparation d\'entretiens et l\'assistance au placement d\'emploi, assurant une transition en douceur vers le marché du travail.',
+                readyLearningJourney: 'Prêt à Commencer Votre Parcours d\'Apprentissage?',
+                experienceMethodology: 'Découvrez notre méthodologie unique et transformez votre carrière avec une éducation pratique et concrète.',
+                
+                // Testimonials
+                testimonialsTitle: 'Ce Que Disent Nos Étudiants',
+                testimonialsSubtitle: 'Écoutez nos étudiants',
+                studentSuccessStories: 'Histoires de Succès d\'Étudiants',
+                jobPlacementRate: 'Taux de Placement d\'Emploi',
+                averageRating: 'Note Moyenne',
+                happyGraduates: 'Diplômés Satisfaits',
+                partnerCompanies: 'Entreprises Partenaires',
+                
+                // Resources
+                resourcesTitle: 'Ressources d\'Apprentissage',
+                resourcesSubtitle: 'Accédez à notre collection complète de matériels et ressources d\'apprentissage',
+                exploreVideos: 'Explorez Nos Vidéos d\'Apprentissage',
+                videosDescription: 'Mosley explique comment fonctionne notre système d\'enseignement des langues - nous sommes le hub des langues',
+                systemOverview: 'Aperçu du Système d\'Enseignement des Langues',
+                clickToWatch: 'Cliquez pour regarder sur YouTube',
+                learningVideos: 'Vidéos d\'Apprentissage',
+                videoTutorials: 'Tutoriels vidéo complets couvrant tous les matériaux de cours',
+                accessNow: 'Accéder Maintenant',
+                studyMaterials: 'Matériaux d\'Étude',
+                downloadableResources: 'Ressources téléchargeables, guides et exercices pratiques',
+                audioLessons: 'Leçons Audio',
+                listeningExercises: 'Exercices d\'écoute et guides de prononciation pour les apprenants de langues',
+                assessmentTools: 'Outils d\'Évaluation',
+                practiceTests: 'Tests pratiques et ressources d\'évaluation des compétences',
+                comingSoon: 'Bientôt Disponible',
+                enhanceSkills: 'Améliorez Vos Compétences',
+                holisticApproach: 'Nous croyons en une approche holistique de l\'éducation, combinant les connaissances théoriques avec l\'application pratique. Nos ressources sont conçues pour vous aider à maîtriser les compétences essentielles cruciales pour tout domaine professionnel.',
+                comprehensiveLibrary: 'Que vous appreniez une nouvelle langue ou développiez des compétences techniques, notre bibliothèque de ressources complète soutient votre parcours à chaque étape.',
+                
+                // Contact Section
+                getInTouchTitle: 'Entrez en Contact Avec Nous',
+                contactSectionSubtitle: 'Prêt à commencer votre parcours d\'apprentissage? Contactez-nous aujourd\'hui et discutons de vos objectifs',
+                sendMessage: 'Envoyez-Nous un Message',
+                yourName: 'Votre Nom',
+                yourEmail: 'Votre Email',
+                subject: 'Sujet',
+                yourMessage: 'Votre Message',
+                sendMessageBtn: 'Envoyer le Message',
+                contactInformation: 'Informations de Contact',
+                chatOnWhatsApp: 'Discuter sur WhatsApp',
+                
+                // Footer
+                footerDescription: 'Institution éducative leader dédiée à favoriser les talents et à stimuler la croissance de carrière au Rwanda et au-delà grâce à des programmes de formation pratiques et axés sur les compétences.',
+                quickLinks: 'Liens Rapides',
+                popularCourses: 'Cours Populaires',
+                contactInfo: 'Informations de Contact',
+                address: 'Adresse',
+                phone: 'Téléphone',
+                email: 'Email',
+                webDevelopment: 'Développement Web',
+                englishLanguage: 'Langue Anglaise',
+                frenchLanguage: 'Langue Française',
+                mobileDevelopment: 'Développement Mobile',
+                
+                // Language Skills
+                speaking: 'Expression Orale',
+                speakingDesc: 'Exercices d\'expression orale interactifs et pratique de conversation',
+                listening: 'Compréhension Orale',
+                listeningDesc: 'Compréhension audio et compétences d\'écoute active',
+                writing: 'Expression Écrite',
+                writingDesc: 'Pratique d\'écriture structurée et compétences de composition',
+                reading: 'Compréhension Écrite',
+                readingDesc: 'Compréhension de lecture et compétences analytiques',
+                
+                // Contact and Social
+                followUs: 'Suivez-Nous',
+                readyToStartLearning: 'Prêt à Commencer l\'Apprentissage?',
+                contactUsWhatsAppDesc: 'Contactez-nous directement via WhatsApp pour un support instantané et une assistance à l\'inscription.',
+                
+                // Enhanced Skills
+                enhanceSkills: 'Développez Vos Compétences',
+                holisticApproach: 'Nous croyons en une approche holistique de l\'éducation, combinant la connaissance théorique avec l\'application pratique. Nos ressources sont conçues pour vous aider à maîtriser les compétences essentielles cruciales pour tout domaine professionnel.',
+                comprehensiveLibrary: 'Que vous appreniez une nouvelle langue ou développiez des compétences techniques, notre bibliothèque de ressources complète soutient votre parcours à chaque étape.',
+                
+                // Contact & Footer
+                readyToStart: 'Prêt à Commencer Votre Parcours d\'Apprentissage?',
+                contactUs: 'Contactez-nous aujourd\'hui et discutons de vos objectifs!',
+                whatsappUs: 'WhatsApp Maintenant',
+                backToTop: '⬆️ Retour en Haut',
+                allRightsReserved: '© 2024 Loyal Training Hub Ltd. Tous droits réservés.',
+                madeWith: 'Fait avec ❤️ par Ibrix digital',
+                
+                // Common
+                empoweringFutures: 'Autonomiser les Avenirs'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'fr' : 'en';
+            updateLanguage();
+            updateLanguageButton();
+            localStorage.setItem('lth-language', currentLanguage);
+        }
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+            
+            // Handle placeholders
+            const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+            placeholderElements.forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[currentLanguage][key]) {
+                    element.placeholder = translations[currentLanguage][key];
+                }
+            });
+            
+            document.documentElement.lang = currentLanguage;
+        }
+
+        function updateLanguageButton() {
+            const langButton = document.getElementById('currentLang');
+            const langButtonMobile = document.getElementById('currentLangMobile');
+            if (langButton) {
+                langButton.textContent = currentLanguage === 'en' ? 'FR' : 'EN';
+            }
+            if (langButtonMobile) {
+                langButtonMobile.textContent = currentLanguage === 'en' ? 'FR' : 'EN';
+            }
+        }
+
+        // Initialize language on page load
+        function initLanguage() {
+            const savedLanguage = localStorage.getItem('lth-language');
+            if (savedLanguage && ['en', 'fr'].includes(savedLanguage)) {
+                currentLanguage = savedLanguage;
+            }
+            updateLanguage();
+            updateLanguageButton();
+        }
+
+        // Apply/Donate Dropdown Functions
+        function toggleApplyDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const isVisible = dropdown.style.display === 'block';
+            
+            // Close all dropdowns first
+            closeAllDropdowns();
+            
+            // Toggle this dropdown
+            if (!isVisible) {
+                dropdown.style.display = 'block';
+            }
+        }
+
+        function toggleDonateDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const isVisible = dropdown.style.display === 'block';
+            
+            // Close all dropdowns first
+            closeAllDropdowns();
+            
+            // Toggle this dropdown
+            if (!isVisible) {
+                dropdown.style.display = 'block';
+            }
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.apply-dropdown, .donate-dropdown').forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.apply-button-container') && !event.target.closest('.donate-button-container')) {
+                closeAllDropdowns();
+            }
+        });
+
         // Initialize animations on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language system
+            initLanguage();
+            
             // Trigger initial animation check
             setTimeout(animateOnScroll, 100);
             
@@ -2087,5 +3122,6 @@
     </script>
 </body>
 </html>
+
 
 
