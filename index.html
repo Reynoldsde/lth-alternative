@@ -29,25 +29,25 @@
         }
         
         :root {
-            /* Color System */
-            --primary: 214 100% 47%;
-            --primary-glow: 214 100% 65%;
-            --secondary: 37 90% 55%;
-            --secondary-glow: 37 90% 70%;
-            --background: 0 0% 100%;
-            --foreground: 222.2 84% 4.9%;
+            /* Color System - Logo-based colors: Orange/Gold primary with minimal ocean blue */
+            --primary: 31 100% 45%;           /* Orange/Gold #C67C1F for buttons */
+            --primary-glow: 31 100% 55%;      /* Lighter Orange/Gold */
+            --secondary: 0 0% 100%;           /* White #FFFFFF */
+            --accent: 200 100% 25%;           /* Ocean Blue (minimal use) */
+            --background: 0 0% 100%;          /* White background */
+            --foreground: 222.2 84% 4.9%;    /* Dark text */
             --muted: 210 40% 96.1%;
             --muted-foreground: 215.4 16.3% 46.9%;
             --card: 0 0% 100%;
             --border: 214.3 31.8% 91.4%;
             
-            /* Gradients */
-            --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+            /* Gradients - Orange/Gold with white */
+            --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(31 100% 50%) 100%);
             --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--muted)));
             
-            /* Shadows */
-            --shadow-premium: 0 25px 50px -12px hsl(var(--primary) / 0.25);
-            --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+            /* Shadows - Orange/Gold theme */
+            --shadow-premium: 0 25px 50px -12px hsl(31 100% 45% / 0.25);
+            --shadow-glow: 0 0 40px hsl(31 100% 45% / 0.3);
             --shadow-card: 0 10px 30px -10px hsl(var(--foreground) / 0.1);
             
             /* Transitions */
@@ -60,6 +60,7 @@
             color: hsl(var(--foreground));
             background: hsl(var(--background));
             overflow-x: hidden;
+            padding-top: 80px; /* Add padding to prevent content from hiding behind sticky nav */
         }
         
         /* Loading Screen */
@@ -162,7 +163,7 @@
         }
         
         .btn-primary {
-            background: var(--gradient-hero);
+            background: #C67C1F;
             color: white;
             box-shadow: var(--shadow-premium);
         }
@@ -184,7 +185,7 @@
         }
         
         .btn-secondary {
-            background: hsl(var(--secondary));
+            background: #C67C1F;
             color: white;
             box-shadow: var(--shadow-card);
         }
@@ -215,17 +216,20 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            backdrop-filter: blur(12px);
             background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid hsl(var(--border));
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-card);
             transition: var(--transition-smooth);
+            border-bottom: 1px solid hsl(var(--border));
         }
         
         .nav-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 0;
+            padding: 0.75rem 0;
+            min-height: 60px;
+            gap: 1rem;
         }
         
         .logo {
@@ -237,20 +241,24 @@
         }
         
         .logo-img {
-            width: 6rem;
-            height: 6rem;
+            width: 5rem;
+            height: 5rem;
             border-radius: 50%;
             object-fit: cover;
+            border: 3px solid hsl(var(--primary));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         .logo-text h1 {
             font-size: 1.5rem;
             font-weight: bold;
             margin: 0;
+            color: hsl(var(--primary));
+            text-shadow: none;
         }
 
         .logo-text p {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: hsl(var(--muted-foreground));
             margin: 0;
         }
@@ -258,35 +266,51 @@
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 0.5rem;
             list-style: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            overflow: visible;
+            border: 1px solid hsl(var(--border));
+            flex: 1;
+            justify-content: center;
+            max-width: 600px;
+        }
+        
+        .nav-menu li {
+            border-right: 1px solid hsl(var(--border));
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .nav-menu li:last-child {
+            border-right: none;
         }
         
         .nav-menu a {
+            display: block;
+            padding: 0.75rem 0.5rem;
             text-decoration: none;
-            color: hsl(var(--foreground));
-            font-weight: 500;
+            color: hsl(var(--accent));
+            font-weight: 600;
+            font-size: 0.75rem;
             position: relative;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            background: transparent;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        
+
         .nav-menu a:hover {
+            background: hsl(var(--muted));
             color: hsl(var(--primary));
         }
-        
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -0.25rem;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-hero);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-menu a:hover::after {
-            width: 100%;
+
+        .nav-menu a.active {
+            background: hsl(var(--muted));
+            color: hsl(var(--primary));
         }
         
         .mobile-menu-btn {
@@ -343,36 +367,128 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 0.5rem;
             cursor: pointer;
             transition: var(--transition-smooth);
             font-weight: 500;
-            color: hsl(var(--foreground));
+            color: white;
             text-decoration: none;
         }
 
         .language-switcher:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
         }
 
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
+            flex-shrink: 0;
         }
         
-        /* Hero Section */
+        /* Hero Section with Slider */
         .hero {
             min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-slide .container {
             position: relative;
-            overflow: hidden;
-            background: var(--gradient-hero);
+            z-index: 2;
+        }
+        
+        .hero-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .hero-nav-prev {
+            left: 2rem;
+        }
+        
+        .hero-nav-next {
+            right: 2rem;
+        }
+        
+        .hero-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        
+        .hero-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .hero-indicator.active {
+            background: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
         }
         
         .hero::before {
@@ -891,6 +1007,20 @@
                 display: block;
             }
             
+            .nav-actions {
+                gap: 0.25rem;
+            }
+            
+            .language-switcher {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .apply-btn-main {
+                padding: 0.6rem 1rem !important;
+                font-size: 0.85rem !important;
+            }
+            
             .hero {
                 padding: 2rem 0;
                 min-height: 90vh;
@@ -1263,70 +1393,105 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Sliding Effects -->
     <section id="hero" class="hero">
-        <div class="container">
-            <div class="hero-content animate-on-scroll">
-                <h1><span data-translate="heroTitle">Unlock Your Professional and Academic Potential</span> <span data-translate="heroSubtitle">with <span class="gradient-text">Loyal Training Hub</span></span></h1>
-                <p data-translate="heroDescription">At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more.</p>
-                
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <span class="stat-number">2500+</span>
-                        <span class="stat-label" data-translate="learnersEmpowered">Learners Empowered</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">30+</span>
-                        <span class="stat-label" data-translate="certifiedTrainers">Certified Trainers</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">95%</span>
-                        <span class="stat-label" data-translate="skillImprovement">Skill Improvement</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">20+</span>
-                        <span class="stat-label" data-translate="corporatePartners">Corporate Partners</span>
-                    </div>
-                </div>
-                
-                <div class="hero-buttons">
-                    <div class="apply-button-container" style="position: relative; display: inline-block;">
-                        <button class="btn btn-primary apply-btn-main" style="font-size: 1.3rem; padding: 1.25rem 2.5rem; box-shadow: var(--shadow-glow); animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
-                            <span data-translate="applyNow">🎓 Apply Now</span>
-                            <span style="margin-left: 0.5rem;">▼</span>
-                        </button>
-                        <div class="apply-dropdown" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none;">
-                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
-                                <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
-                            </a>
-                            <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
-                                <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
-                            </a>
+        <div class="hero-slider-wrapper">
+            <!-- Slide 1 -->
+            <div class="hero-slide active" id="slide1">
+                <div class="hero-background" style="background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(184,134,11,0.9)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') center/cover;"></div>
+                <div class="container">
+                    <div class="hero-content animate-on-scroll">
+                        <h1><span data-translate="heroTitle">Unlock Your Professional and Academic Potential</span> <span data-translate="heroSubtitle">with <span class="gradient-text">Loyal Training Hub</span></span></h1>
+                        <p data-translate="heroDescription">At Loyal Training Hub, we equip you with essential skills in computer software like ArchiCAD, Revit, Microsoft Project, Solidworks, Photoshop, Illustrator, and more to enhance your professional growth. We also enhance your language proficiency in English, French, Chinese, and more.</p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-card">
+                                <span class="stat-number">2500+</span>
+                                <span class="stat-label" data-translate="learnersEmpowered">Learners Empowered</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">30+</span>
+                                <span class="stat-label" data-translate="certifiedTrainers">Certified Trainers</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">95%</span>
+                                <span class="stat-label" data-translate="skillImprovement">Skill Improvement</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">20+</span>
+                                <span class="stat-label" data-translate="corporatePartners">Corporate Partners</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="donate-button-container" style="position: relative; display: inline-block;">
-                        <button class="btn btn-secondary donate-btn-main" style="font-size: 1.2rem; padding: 1rem 2rem; box-shadow: var(--shadow-premium); animation: pulse-secondary 3s infinite;" onclick="toggleDonateDropdown(this)">
-                            <span data-translate="donateNow">💝 Donate Now - Support Education</span>
-                            <span style="margin-left: 0.5rem;">▼</span>
-                        </button>
-                        <div class="donate-dropdown" style="position: absolute; top: 100%; left: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 300px;">
-                            <div style="padding: 1rem; border-bottom: 1px solid hsl(var(--border));">
-                                <h4 style="font-weight: bold; margin-bottom: 0.5rem; color: hsl(var(--primary));">💳 Bank Transfer</h4>
-                                <div style="font-size: 0.85rem; color: hsl(var(--muted-foreground)); line-height: 1.4;">
-                                    <p><strong>Bank Swift Code:</strong> EQBL RW RW</p>
-                                    <p><strong>Account Name:</strong> LOYAL TRAINING HUB LTD</p>
-                                    <p><strong>Account Number:</strong> 4013200912230</p>
-                                    <p><strong>Currency:</strong> RWANDAN FRANCS</p>
+                        
+                        <div class="hero-buttons">
+                            <div class="apply-button-container" style="position: relative; display: inline-block;">
+                                <button class="btn btn-primary apply-btn-main" style="font-size: 1.3rem; padding: 1.25rem 2.5rem; box-shadow: var(--shadow-glow); animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                                    <span data-translate="applyNow">🎓 Apply Now</span>
+                                    <span style="margin-left: 0.5rem;">▼</span>
+                                </button>
+                                <div class="apply-dropdown" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none;">
+                                    <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                        <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                                    </a>
+                                    <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                        <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                                    </a>
                                 </div>
                             </div>
-                            <a href="tel:0782407285" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;">
-                                <span style="margin-right: 0.5rem;">📱</span>MTN Mobile Money: 0782407285
+                            <a href="donate.html" class="btn btn-secondary" style="font-size: 1.2rem; padding: 1rem 2rem; box-shadow: var(--shadow-premium); animation: pulse-secondary 3s infinite;">
+                                <span data-translate="donateNow">💝 Donate Now - Support Education</span>
                             </a>
+                            <a href="#programs" class="btn btn-outline"><span data-translate="exploreCourses">📚 Explore Our Programs</span></a>
+                            <a href="#contact" class="btn btn-outline"><span data-translate="getInTouch">👥 Contact Us</span></a>
                         </div>
                     </div>
-                    <a href="#programs" class="btn btn-outline"><span data-translate="exploreCourses">📚 Explore Our Programs</span></a>
-                    <a href="#contact" class="btn btn-outline"><span data-translate="getInTouch">👥 Get in Touch</span></a>
                 </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="hero-slide" id="slide2">
+                <div class="hero-background" style="background: linear-gradient(135deg, rgba(198,124,31,0.9), rgba(255,255,255,0.8)), url('https://static.vecteezy.com/system/resources/thumbnails/026/911/382/small_2x/happy-student-boy-with-books-isolated-free-photo.jpg') center/cover;"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Master <span class="gradient-text">Professional Software</span> & Transform Your Career</h1>
+                        <p>Learn industry-standard software including ArchiCAD, Revit, Microsoft Project, Solidworks, Adobe Creative Suite, and more with hands-on training from certified professionals.</p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-card">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">Software Programs</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">98%</span>
+                                <span class="stat-label">Job Placement Rate</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Learning Support</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">5★</span>
+                                <span class="stat-label">Student Rating</span>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-buttons">
+                            <a href="#programs" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.25rem 2.5rem;">🖥️ View IT Programs</a>
+                            <a href="donate.html" class="btn btn-secondary" style="font-size: 1.2rem; padding: 1rem 2rem;">💝 Support Our Mission</a>
+                            <a href="#contact" class="btn btn-outline">📞 Schedule Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation arrows -->
+            <button class="hero-nav-btn hero-nav-prev" onclick="previousSlide()">‹</button>
+            <button class="hero-nav-btn hero-nav-next" onclick="nextSlide()">›</button>
+            
+            <!-- Slide indicators -->
+            <div class="hero-indicators">
+                <button class="hero-indicator active" onclick="currentSlide(1)"></button>
+                <button class="hero-indicator" onclick="currentSlide(2)"></button>
             </div>
         </div>
     </section>
@@ -1363,12 +1528,6 @@
             </div>
             
             <div class="grid grid-2" style="gap: 2rem;">
-                <div class="card animate-on-scroll" style="text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 1.5rem;">💻</div>
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="softwareDevelopment">Software Development Program</h3>
-                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;" data-translate="softwareDevelopmentDesc">Master the latest programming languages, frameworks, and tools to develop robust software applications. Our comprehensive curriculum covers front-end and back-end development, database management, and software architecture.</p>
-                    <a href="#application" class="btn btn-primary"><span data-translate="applyNow">Apply Now</span></a>
-                </div>
                 
                 <div class="card animate-on-scroll" style="text-align: center;">
                     <div style="font-size: 3rem; margin-bottom: 1.5rem;">🗣️</div>
@@ -1379,8 +1538,8 @@
                 
                 <div class="card animate-on-scroll" style="text-align: center;">
                     <div style="font-size: 3rem; margin-bottom: 1.5rem;">🖥️</div>
-                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="ictComputerSoftware">ICT and Computer Software</h3>
-                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;" data-translate="ictComputerSoftwareDesc">Build essential skills in computer software including ArchiCAD, Revit, Microsoft Project Management, SolidWorks, Adobe Photoshop, Illustrator, and more. Our hands-on approach ensures you gain practical experience with industry-standard tools.</p>
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" data-translate="ictComputerSoftware">ICT and Computer Program</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;" data-translate="ictComputerSoftwareDesc">Build essential skills in computer software including ArchiCAD, Revit, Microsoft Project Management, SolidWorks, Adobe Photoshop, Illustrator, and more. <strong>Including Software Development Program specialization</strong> covering programming languages, frameworks, and tools for robust software applications. Our hands-on approach ensures you gain practical experience with industry-standard tools.</p>
                     <a href="#application" class="btn btn-primary"><span data-translate="applyNow">Apply Now</span></a>
                 </div>
                 
@@ -1571,6 +1730,50 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Additional About Sections -->
+            <div class="grid grid-2" style="gap: 2rem; margin-top: 4rem;">
+                <!-- Visiting LTH -->
+                <div class="card animate-on-scroll">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: hsl(var(--primary));">
+                        <span style="margin-right: 0.5rem;">🏛️</span>Visiting LTH
+                    </h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+                        Plan your visit to Loyal Training Hub and experience our state-of-the-art facilities firsthand. Our campus features modern computer labs, interactive classrooms, and collaborative learning spaces designed to enhance your educational experience.
+                    </p>
+                    <ul style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+                        <li style="margin-bottom: 0.5rem;">• Modern computer labs with latest software</li>
+                        <li style="margin-bottom: 0.5rem;">• Interactive smart classrooms</li>
+                        <li style="margin-bottom: 0.5rem;">• Free WiFi throughout the campus</li>
+                        <li style="margin-bottom: 0.5rem;">• Student lounge and study areas</li>
+                        <li style="margin-bottom: 0.5rem;">• Career counseling center</li>
+                    </ul>
+                    <div style="font-size: 0.9rem; color: hsl(var(--muted-foreground));">
+                        <strong>Location:</strong> Kigali, Rwanda<br/>
+                        <strong>Visiting Hours:</strong> Monday - Saturday, 8:00 AM - 6:00 PM
+                    </div>
+                </div>
+
+                <!-- Hire a Student -->
+                <div class="card animate-on-scroll">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: hsl(var(--primary));">
+                        <span style="margin-right: 0.5rem;">🤝</span>Hire a Student
+                    </h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+                        Connect with our talented graduates and current students for internships, projects, or full-time positions. Our students are trained in cutting-edge technologies and real-world applications.
+                    </p>
+                    <ul style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+                        <li style="margin-bottom: 0.5rem;">• 95% job placement rate within 3 months</li>
+                        <li style="margin-bottom: 0.5rem;">• Students trained in latest industry standards</li>
+                        <li style="margin-bottom: 0.5rem;">• Portfolio-ready graduates</li>
+                        <li style="margin-bottom: 0.5rem;">• Flexible hiring options available</li>
+                        <li style="margin-bottom: 0.5rem;">• Ongoing career support services</li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <a href="#contact" class="btn btn-secondary">Contact Us for Hiring</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1695,28 +1898,41 @@
                         </div>
                         
                         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                            <a href="#application" class="btn btn-primary" style="flex: 1; min-width: 140px; animation: pulse-glow 2s infinite;"><span data-translate="applyNow">🎓 Apply Now</span></a>
-                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20Language%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="flex: 1; min-width: 140px;">
-                                <span data-translate="inquireLanguages">💬 Inquire More</span>
-                            </a>
+                            <div class="apply-button-container" style="position: relative; display: inline-block; flex: 1; min-width: 140px;">
+                                <button class="btn btn-primary" style="width: 100%; animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                                    <span data-translate="applyNow">🎓 Apply Now</span>
+                                    <span style="margin-left: 0.5rem;">▼</span>
+                                </button>
+                                <div class="apply-dropdown" style="position: absolute; top: 100%; left: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 100%; white-space: nowrap;">
+                                    <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20Language%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                        <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                                    </a>
+                                    <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                        <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                                    </a>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" onclick="openCourseModal('languages')" style="flex: 1; min-width: 140px;">
+                                <span data-translate="viewDetails">📚 View Details</span>
+                            </button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- IT Department -->
+                <!-- ICT & Computer Software Department -->
                 <div class="course-card animate-on-scroll">
                     <div class="course-image">
-                        <img src="https://www.tuv.com/content-media-files/master-content/services/academy-life-care/a02-training-hr-development/1730-tuv-rheinland-it-certification-training-courses/tuv-rheinland-it-certification-training-courses-fo-159912250_core_2_2_1.jpg" alt="IT Department">
+                        <img src="https://www.tuv.com/content-media-files/master-content/services/academy-life-care/a02-training-hr-development/1730-tuv-rheinland-it-certification-training-courses/tuv-rheinland-it-certification-training-courses-fo-159912250_core_2_2_1.jpg" alt="ICT & Computer Software Department">
                         <div class="course-overlay">
                             <div style="text-align: center;">
                                 <div style="font-size: 3rem; margin-bottom: 1rem;">💻</div>
-                                <h3 style="font-size: 1.5rem; font-weight: bold;" data-translate="itDept">IT Department</h3>
+                                <h3 style="font-size: 1.5rem; font-weight: bold;">ICT & Computer Software Program</h3>
                             </div>
                         </div>
                     </div>
                     <div class="course-content">
-                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;" data-translate="itDept">IT Department</h3>
-                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;" data-translate="itDescription">Build the technical skills demanded by today's rapidly evolving digital landscape.</p>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">ICT & Computer Software Program</h3>
+                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">Build the technical skills demanded by today's rapidly evolving digital landscape.</p>
                         
                         <h4 style="font-weight: 600; margin-bottom: 1rem;" data-translate="coursesOffered">Courses Offered:</h4>
                         <div class="course-list">
@@ -1729,20 +1945,76 @@
                                 <span style="font-size: 0.9rem; font-weight: 500;" data-translate="dataScience">Data Science & Analytics</span>
                             </div>
                             <div class="course-item">
-                                <span>🛡️</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="cyberSecurity">Cyber Security Fundamentals</span>
+                                <span>🏗️</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">ArchiCAD</span>
                             </div>
                             <div class="course-item">
-                                <span>📱</span>
-                                <span style="font-size: 0.9rem; font-weight: 500;" data-translate="mobileAppDev">Mobile App Development</span>
+                                <span>🏠</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Revit</span>
+                            </div>
+                            <div class="course-item">
+                                <span>📋</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Microsoft Project</span>
+                            </div>
+                            <div class="course-item">
+                                <span>🔧</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">SolidWorks</span>
+                            </div>
+                            <div class="course-item">
+                                <span>🎨</span>
+                                <span style="font-size: 0.9rem; font-weight: 500;">Photoshop & Illustrator</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Software Development Specialization -->
+                        <div style="background: hsl(var(--muted) / 0.5); border-radius: 0.5rem; padding: 1rem; margin: 1rem 0; border-left: 4px solid hsl(var(--primary));">
+                            <h5 style="font-weight: 600; margin-bottom: 0.75rem; color: hsl(var(--primary)); font-size: 0.95rem;">Software Development Specialization</h5>
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: hsl(var(--muted-foreground));">
+                                    <div style="width: 6px; height: 6px; background: hsl(var(--primary)); border-radius: 50%; flex-shrink: 0;"></div>
+                                    <span>Web Development (HTML, CSS, JavaScript, React)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: hsl(var(--muted-foreground));">
+                                    <div style="width: 6px; height: 6px; background: hsl(var(--primary)); border-radius: 50%; flex-shrink: 0;"></div>
+                                    <span>Mobile App Development (React Native, Flutter)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: hsl(var(--muted-foreground));">
+                                    <div style="width: 6px; height: 6px; background: hsl(var(--primary)); border-radius: 50%; flex-shrink: 0;"></div>
+                                    <span>Backend Development (Node.js, Python, Java)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: hsl(var(--muted-foreground));">
+                                    <div style="width: 6px; height: 6px; background: hsl(var(--primary)); border-radius: 50%; flex-shrink: 0;"></div>
+                                    <span>Database Management (MySQL, MongoDB)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: hsl(var(--muted-foreground));">
+                                    <div style="width: 6px; height: 6px; background: hsl(var(--primary)); border-radius: 50%; flex-shrink: 0;"></div>
+                                    <span>Version Control (Git, GitHub)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: hsl(var(--muted-foreground));">
+                                    <div style="width: 6px; height: 6px; background: hsl(var(--primary)); border-radius: 50%; flex-shrink: 0;"></div>
+                                    <span>UI/UX Design Fundamentals</span>
+                                </div>
                             </div>
                         </div>
                         
                         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                            <a href="#application" class="btn btn-primary" style="flex: 1; min-width: 140px; animation: pulse-glow 2s infinite;"><span data-translate="applyNow">🎓 Apply Now</span></a>
-                            <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20IT%20Courses.%20Could%20you%20please%20provide%20more%20information%3F" class="btn btn-secondary" target="_blank" style="flex: 1; min-width: 140px;">
-                                <span data-translate="inquireIT">💻 Inquire More</span>
-                            </a>
+                            <div class="apply-button-container" style="position: relative; display: inline-block; flex: 1; min-width: 140px;">
+                                <button class="btn btn-primary" style="width: 100%; animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                                    <span data-translate="applyNow">🎓 Apply Now</span>
+                                    <span style="margin-left: 0.5rem;">▼</span>
+                                </button>
+                                <div class="apply-dropdown" style="position: absolute; top: 100%; left: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 100%; white-space: nowrap;">
+                                    <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20your%20ICT%20%26%20Computer%20Software%20Programs.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                                        <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                                    </a>
+                                    <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeAllDropdowns()">
+                                        <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                                    </a>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" onclick="openCourseModal('ict')" style="flex: 1; min-width: 140px;">
+                                <span data-translate="viewDetails">📚 View Details</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -2320,7 +2592,9 @@
                             <span data-translate="donateNow">💝 Support Education</span>
                             <span style="margin-left: 0.5rem;">▼</span>
                         </button>
-                        <div class="donate-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 320px;">
+                            <div class="donate-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 400px; max-width: 500px;">
+                            
+                            <!-- Bank Transfer -->
                             <div style="padding: 1rem; border-bottom: 1px solid hsl(var(--border));">
                                 <h4 style="font-weight: bold; margin-bottom: 0.5rem; color: hsl(var(--primary)); font-size: 0.9rem;">💳 Bank Transfer</h4>
                                 <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground)); line-height: 1.4;">
@@ -2369,6 +2643,41 @@
     </a>
 
     <script>
+        // Hero Slider Functions
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.hero-indicator');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            // Remove active class from all slides and indicators
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Add active class to current slide and indicator
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            showSlide(currentSlideIndex);
+        }
+
+        function previousSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-advance slides every 6 seconds
+        setInterval(nextSlide, 6000);
+
+        // Existing JavaScript functions
         // Loading Screen
         window.addEventListener('load', function() {
             setTimeout(function() {
@@ -3089,6 +3398,119 @@
             }
         });
 
+        // Course Modal Functions
+        function openCourseModal(courseType) {
+            const modal = document.getElementById('courseModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            let content = '';
+            if (courseType === 'languages') {
+                content = `
+                    <h2 style="color: hsl(var(--primary)); margin-bottom: 1.5rem;">🌍 Languages Department - Detailed Information</h2>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: hsl(var(--secondary)); margin-bottom: 1rem;">Available Language Programs:</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem;">
+                                <h4>🇬🇧 English Language Program</h4>
+                                <p><strong>Duration:</strong> 3-6 months | <strong>Level:</strong> Beginner to Advanced</p>
+                                <p><strong>Focus:</strong> Conversational English, Business English, IELTS/TOEFL preparation</p>
+                                <p><strong>Outcomes:</strong> International certification opportunities, improved career prospects</p>
+                            </div>
+                            <div style="padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem;">
+                                <h4>🇫🇷 French Language Program</h4>
+                                <p><strong>Duration:</strong> 3-6 months | <strong>Level:</strong> Beginner to Advanced</p>
+                                <p><strong>Focus:</strong> Conversational French, Business French, DELF/TEF preparation</p>
+                                <p><strong>Outcomes:</strong> International certification, enhanced global opportunities</p>
+                            </div>
+                            <div style="padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem;">
+                                <h4>🇨🇳 Chinese Language Program</h4>
+                                <p><strong>Duration:</strong> 3-6 months | <strong>Level:</strong> Beginner to Intermediate</p>
+                                <p><strong>Focus:</strong> Mandarin conversation, Business Chinese, HSK preparation</p>
+                                <p><strong>Outcomes:</strong> Access to Asian markets, cultural competency</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: hsl(var(--secondary)); margin-bottom: 1rem;">Learning Methodology:</h3>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Interactive conversation practice with native speakers</li>
+                            <li>Real-world scenarios and practical applications</li>
+                            <li>Cultural immersion activities</li>
+                            <li>Regular assessment and personalized feedback</li>
+                            <li>Certification exam preparation</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: hsl(var(--muted)); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                        <h4 style="color: hsl(var(--primary));">💼 Career Benefits:</h4>
+                        <p>Language proficiency opens doors to international opportunities, higher salaries, and global career advancement.</p>
+                    </div>
+                `;
+            } else if (courseType === 'it') {
+                content = `
+                    <h2 style="color: hsl(var(--primary)); margin-bottom: 1.5rem;">💻 IT Department - Detailed Information</h2>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: hsl(var(--secondary)); margin-bottom: 1rem;">Available IT Programs:</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem;">
+                                <h4>🌐 Full-Stack Web Development</h4>
+                                <p><strong>Duration:</strong> 3-6 months | <strong>Level:</strong> Beginner to Advanced</p>
+                                <p><strong>Technologies:</strong> HTML, CSS, JavaScript, React, Node.js, Databases</p>
+                                <p><strong>Projects:</strong> Build real websites and web applications</p>
+                            </div>
+                            <div style="padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem;">
+                                <h4>📊 Data Science & Analytics</h4>
+                                <p><strong>Duration:</strong> 3-6 months | <strong>Level:</strong> Intermediate</p>
+                                <p><strong>Tools:</strong> Python, R, SQL, Tableau, Machine Learning</p>
+                                <p><strong>Focus:</strong> Data analysis, visualization, predictive modeling</p>
+                            </div>
+                            <div style="padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem;">
+                                <h4>🛡️ Cyber Security Fundamentals</h4>
+                                <p><strong>Duration:</strong> 3-6 months | <strong>Level:</strong> Beginner to Intermediate</p>
+                                <p><strong>Focus:</strong> Network security, ethical hacking, risk assessment</p>
+                                <p><strong>Certifications:</strong> Industry-recognized security certifications</p>
+                            </div>
+                            <div style="padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: 0.5rem;">
+                                <h4>📱 Mobile App Development</h4>
+                                <p><strong>Duration:</strong> 3-6 months | <strong>Level:</strong> Intermediate</p>
+                                <p><strong>Platforms:</strong> iOS (Swift), Android (Kotlin), React Native</p>
+                                <p><strong>Portfolio:</strong> Build and publish your own mobile apps</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: hsl(var(--secondary)); margin-bottom: 1rem;">Learning Approach:</h3>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Hands-on project-based learning</li>
+                            <li>Real-world industry scenarios</li>
+                            <li>Mentorship from experienced developers</li>
+                            <li>Portfolio development for job applications</li>
+                            <li>Job placement assistance</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: hsl(var(--muted)); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                        <h4 style="color: hsl(var(--primary));">🚀 Success Rate:</h4>
+                        <p>80% of our IT graduates secure employment or start their own tech businesses within 3 months of completion.</p>
+                    </div>
+                `;
+            }
+            
+            modalContent.innerHTML = content;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeCourseModal() {
+            const modal = document.getElementById('courseModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
         // Initialize animations on page load
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize language system
@@ -3119,6 +3541,66 @@
         }
 
         window.addEventListener('scroll', requestTick);
+    </script>
+
+    <!-- Course Details Modal -->
+    <div id="courseModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+        <div style="background: white; border-radius: 1rem; max-width: 800px; max-height: 90vh; overflow-y: auto; margin: 2rem; position: relative; box-shadow: var(--shadow-premium);">
+            <button onclick="closeCourseModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: hsl(var(--muted-foreground)); width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: var(--transition-smooth);" onmouseover="this.style.background='hsl(var(--muted))'" onmouseout="this.style.background='none'">×</button>
+            <div id="modalContent" style="padding: 2rem;">
+                <!-- Content will be injected here -->
+            </div>
+            <div style="padding: 0 2rem 2rem 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="apply-button-container" style="position: relative; display: inline-block; flex: 1; min-width: 200px;">
+                    <button class="btn btn-primary" style="width: 100%; animation: pulse-glow 2s infinite;" onclick="toggleApplyDropdown(this)">
+                        <span data-translate="applyNow">🎓 Apply Now</span>
+                        <span style="margin-left: 0.5rem;">▼</span>
+                    </button>
+                    <div class="apply-dropdown" style="position: absolute; top: 100%; left: 0; background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 100%; white-space: nowrap;">
+                        <a href="https://wa.me/250788244964?text=Hello%2C%20I%27m%20interested%20in%20applying%20to%20Loyal%20Training%20Hub.%20Could%20you%20please%20provide%20more%20information%3F" class="dropdown-item" target="_blank" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border)); transition: background-color 0.2s;">
+                            <span style="margin-right: 0.5rem;">📱</span>Apply via WhatsApp
+                        </a>
+                        <a href="#application" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: hsl(var(--foreground)); transition: background-color 0.2s;" onclick="closeCourseModal(); closeAllDropdowns()">
+                            <span style="margin-right: 0.5rem;">📧</span>Apply via Email Form
+                        </a>
+                    </div>
+                </div>
+                <button class="btn btn-outline" onclick="closeCourseModal()" style="flex: 1; min-width: 120px;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HeptaPay Integration Script -->
+    <script src="https://heptapay.com/pay/v1/js/heptapay.js"></script>
+    <script>
+        function pay() {
+            const receivedAmount = document.getElementById('receivedAmount').value;
+            const sendAmount = document.getElementById('sendAmount').value;
+            const note = document.getElementById('note').value;
+            const payerEmail = document.getElementById('payerEmail').value;
+            
+            if (!receivedAmount && !sendAmount) {
+                alert('Please enter an amount to donate.');
+                return;
+            }
+            
+            // Initialize HeptaPay payment
+            const paymentData = {
+                amount: receivedAmount || (sendAmount * 1000), // Convert USD to RWF approximate rate
+                currency: 'RWF',
+                description: 'Donation to Loyal Training Hub - Support Education',
+                customer_email: payerEmail || 'donor@lth.ac.rw',
+                reference: 'LTH-DONATE-' + Date.now()
+            };
+            
+            // Show payment processing message
+            document.querySelector('.hpayres').innerHTML = '<span style="color: hsl(var(--primary));">Processing payment...</span>';
+            
+            // This would integrate with HeptaPay API - placeholder for now
+            setTimeout(() => {
+                document.querySelector('.hpayres').innerHTML = '<span style="color: green;">✓ Thank you for your donation! Visit <a href="https://heptapay.com/" target="_blank" style="color: hsl(var(--primary));">heptapay.com</a> for more info.</span>';
+            }, 2000);
+        }
     </script>
 </body>
 </html>
