@@ -1111,9 +1111,32 @@
         }
         
         /* Enhanced Responsive Design */
+        @media (max-width: 1440px) {
+            .hero h1 {
+                font-size: clamp(2.2rem, 4.5vw, 3.2rem) !important;
+                line-height: 1.2;
+            }
+            
+            .hero p {
+                font-size: clamp(1rem, 2.2vw, 1.4rem) !important;
+                line-height: 1.5;
+            }
+            
+            .section-title {
+                font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+                line-height: 1.3;
+            }
+            
+            .section-subtitle {
+                font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
+                line-height: 1.6;
+            }
+        }
+        
         @media (max-width: 1200px) {
             .container {
-                padding: 0 1.5rem;
+                padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+                max-width: 100%;
             }
             
             .nav-menu {
@@ -1121,19 +1144,70 @@
             }
             
             .nav-menu a {
-                font-size: 0.7rem;
-                padding: 0.75rem 0.4rem;
+                font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+                padding: 0.75rem clamp(0.2rem, 1vw, 0.4rem);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .hero h1 {
+                font-size: clamp(2rem, 4.2vw, 3rem) !important;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                text-align: center;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            .hero p {
+                font-size: clamp(0.95rem, 2vw, 1.3rem) !important;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                text-align: center;
+            }
+            
+            .card h3, .card h4, .feature-card h4 {
+                font-size: clamp(1.1rem, 2.5vw, 1.4rem) !important;
+                line-height: 1.3;
+                margin-bottom: 0.75rem;
+            }
+            
+            .card p, .feature-card p {
+                font-size: clamp(0.85rem, 2vw, 1rem) !important;
+                line-height: 1.6;
             }
         }
         
         @media (max-width: 1024px) {
             .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
                 gap: 1rem;
+                margin: 2rem 0;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+            }
+            
+            .stat-card {
+                padding: 1.25rem;
+                min-height: auto;
+            }
+            
+            .stat-number {
+                font-size: clamp(1.4rem, 3vw, 1.8rem);
+            }
+            
+            .stat-label {
+                font-size: clamp(0.8rem, 2vw, 0.9rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .grid-3 {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .grid-2 {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
                 gap: 1.5rem;
             }
             
@@ -1143,16 +1217,56 @@
             }
             
             .nav-menu a {
-                font-size: 0.65rem;
-                padding: 0.7rem 0.3rem;
+                font-size: clamp(0.55rem, 1.2vw, 0.65rem);
+                padding: 0.7rem clamp(0.2rem, 0.8vw, 0.3rem);
             }
             
             .hero h1 {
-                font-size: 2.8rem !important;
+                font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+                line-height: 1.2;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
             }
             
             .hero p {
-                font-size: 1.1rem !important;
+                font-size: clamp(0.9rem, 2.2vw, 1.1rem) !important;
+                line-height: 1.5;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                min-height: 48px;
+                padding: 0.875rem 1.25rem;
+                font-size: clamp(0.8rem, 2vw, 0.9rem);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .section-title {
+                font-size: clamp(1.6rem, 3.5vw, 2.2rem) !important;
+                line-height: 1.3;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                text-align: center;
+            }
+            
+            .section-subtitle {
+                font-size: clamp(0.9rem, 2.2vw, 1.1rem) !important;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                text-align: center;
             }
         }
         
@@ -1168,61 +1282,69 @@
         
         @media (max-width: 768px) {
             .nav-actions {
-                gap: 0.5rem;
+                gap: clamp(0.25rem, 1vw, 0.5rem);
+                flex-shrink: 0;
             }
             
             .language-switcher {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.8rem;
+                padding: clamp(0.4rem, 2vw, 0.5rem) clamp(0.6rem, 2.5vw, 0.75rem);
+                font-size: clamp(0.7rem, 2vw, 0.8rem);
                 min-height: 44px;
+                white-space: nowrap;
             }
             
             .apply-btn-main {
-                padding: 0.75rem 1rem !important;
-                font-size: 0.85rem !important;
+                padding: clamp(0.6rem, 2vw, 0.75rem) clamp(0.8rem, 2.5vw, 1rem) !important;
+                font-size: clamp(0.7rem, 2vw, 0.85rem) !important;
                 min-height: 44px !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .mobile-menu-btn {
                 min-height: 44px;
                 min-width: 44px;
-                font-size: 1.2rem;
+                font-size: clamp(1rem, 3vw, 1.2rem);
+                padding: 0.5rem;
             }
             
             .hero {
-                padding: 2rem 0;
-                min-height: 90vh;
+                padding: 1rem 0;
+                min-height: 85vh;
             }
             
             .hero-content {
-                padding: 0.5rem 0.25rem;
+                padding: clamp(0.5rem, 2vw, 1rem) clamp(0.25rem, 1vw, 0.5rem);
                 text-align: center;
                 max-width: 100%;
-                width: calc(100vw - 0.5rem);
+                width: 100%;
                 margin: 0 auto;
                 box-sizing: border-box;
             }
             
             .hero h1 {
-                font-size: clamp(1.1rem, 3.8vw, 1.6rem) !important;
+                font-size: clamp(1.3rem, 4.5vw, 2rem) !important;
                 line-height: 1.2;
-                margin-bottom: 0.8rem;
+                margin-bottom: 1rem;
                 word-break: break-word;
                 overflow-wrap: break-word;
                 hyphens: auto;
-                padding: 0 0.25rem;
+                padding: 0 clamp(0.25rem, 1.5vw, 0.5rem);
                 white-space: normal;
                 max-width: 100%;
+                text-align: center;
             }
             
             .hero p {
-                font-size: clamp(0.8rem, 3vw, 0.9rem) !important;
-                margin-bottom: 1.2rem;
-                line-height: 1.4;
-                padding: 0 0.25rem;
+                font-size: clamp(0.85rem, 3.5vw, 1.1rem) !important;
+                margin-bottom: 1.5rem;
+                line-height: 1.5;
+                padding: 0 clamp(0.25rem, 1.5vw, 0.5rem);
                 word-break: break-word;
                 overflow-wrap: break-word;
                 max-width: 100%;
+                text-align: center;
             }
             
             .hero-buttons {
@@ -1230,36 +1352,46 @@
                 align-items: center;
                 gap: 1rem;
                 width: 100%;
-                padding: 0 0.5rem;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                max-width: 350px;
+                margin: 0 auto;
             }
             
             .btn {
                 width: 100%;
-                max-width: 280px;
-                padding: 1rem 1.25rem;
+                max-width: 300px;
+                padding: clamp(0.75rem, 3vw, 1rem) clamp(1rem, 3vw, 1.25rem);
                 min-height: 48px;
-                font-size: 0.9rem;
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
                 text-align: center;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                margin: 0 auto;
             }
             
             .section {
-                padding: 3rem 0;
+                padding: clamp(2rem, 8vw, 3rem) 0;
             }
             
             .section-title {
-                font-size: 1.8rem !important;
+                font-size: clamp(1.4rem, 5vw, 2rem) !important;
                 margin-bottom: 1rem;
                 line-height: 1.3;
-                padding: 0 0.5rem;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
             }
             
             .section-subtitle {
-                font-size: 1rem !important;
+                font-size: clamp(0.9rem, 3.5vw, 1.1rem) !important;
                 line-height: 1.6;
-                padding: 0 0.5rem;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                text-align: center;
             }
             
             .section-header {
@@ -1268,30 +1400,35 @@
             }
             
             .container {
-                padding: 0 0.75rem;
+                padding: 0 clamp(0.5rem, 3vw, 1rem);
                 max-width: 100%;
                 margin: 0 auto;
+                box-sizing: border-box;
             }
             
             .hero-stats {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
                 gap: 1rem;
                 margin: 2rem 0;
-                padding: 0 0.5rem;
+                padding: 0 clamp(0.5rem, 2vw, 1rem);
             }
             
             .stat-card {
-                padding: 1.25rem;
+                padding: clamp(1rem, 3vw, 1.25rem);
                 text-align: center;
+                min-height: auto;
             }
             
             .stat-number {
-                font-size: 1.6rem;
+                font-size: clamp(1.2rem, 4vw, 1.6rem);
+                word-break: break-word;
             }
             
             .stat-label {
-                font-size: 0.85rem;
+                font-size: clamp(0.75rem, 2.5vw, 0.85rem);
                 margin-top: 0.25rem;
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .grid-3 {
@@ -1305,43 +1442,72 @@
             }
             
             .card {
-                padding: 1.5rem;
+                padding: clamp(1.25rem, 4vw, 1.5rem);
                 margin-bottom: 1rem;
+                box-sizing: border-box;
+            }
+            
+            .card h3, .card h4, .feature-card h4 {
+                font-size: clamp(1.1rem, 4vw, 1.3rem) !important;
+                line-height: 1.3;
+                margin-bottom: 0.75rem;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            .card p, .feature-card p {
+                font-size: clamp(0.85rem, 3vw, 1rem) !important;
+                line-height: 1.6;
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .contact-form {
                 grid-template-columns: 1fr;
                 gap: 1rem;
+                padding: clamp(1rem, 3vw, 1.5rem);
+            }
+            
+            .form-input, .form-textarea {
+                font-size: 16px !important;
+                min-height: 48px;
+                padding: 0.75rem 1rem;
+                box-sizing: border-box;
+                width: 100%;
             }
             
             .logo-img {
-                width: 2.8rem;
-                height: 2.8rem;
+                width: clamp(2.5rem, 8vw, 2.8rem);
+                height: clamp(2.5rem, 8vw, 2.8rem);
             }
             
             .logo-text h1 {
-                font-size: 1.1rem;
+                font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .logo-text p {
-                font-size: 0.75rem;
+                font-size: clamp(0.7rem, 2.5vw, 0.75rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .about-image {
-                height: 280px;
+                height: clamp(200px, 50vw, 280px);
                 margin-bottom: 2rem;
                 border-radius: 1rem;
-                object-fit: cover;
             }
             
             .methodology-step {
                 text-align: center;
-                padding: 1rem;
+                padding: clamp(0.75rem, 3vw, 1rem);
             }
             
             .testimonial-card {
                 margin-bottom: 1.5rem;
-                padding: 1.5rem;
+                padding: clamp(1.25rem, 4vw, 1.5rem);
             }
             
             .hero-nav-btn {
@@ -1361,6 +1527,7 @@
             .nav-container {
                 padding: 0.5rem 0;
                 min-height: 64px;
+                gap: clamp(0.5rem, 2vw, 1rem);
             }
             
             .footer-content {
@@ -1369,99 +1536,125 @@
                 text-align: center;
             }
             
+            .footer-section h4 {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .footer-section a, .footer-section li {
+                font-size: clamp(0.85rem, 2.5vw, 1rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
             .whatsapp-float {
                 bottom: 1.5rem;
                 right: 1.5rem;
-                width: 3.5rem;
-                height: 3.5rem;
-                font-size: 1.3rem;
+                width: clamp(3rem, 10vw, 3.5rem);
+                height: clamp(3rem, 10vw, 3.5rem);
+                font-size: clamp(1.1rem, 3.5vw, 1.3rem);
             }
         }
         
         @media (max-width: 480px) {
             .hero h1 {
-                font-size: 1.9rem !important;
-                line-height: 1.1;
+                font-size: clamp(1.1rem, 5vw, 1.8rem) !important;
+                line-height: 1.2;
+                margin-bottom: 0.75rem;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+                text-align: center;
             }
             
             .hero p {
-                font-size: 0.9rem !important;
+                font-size: clamp(0.8rem, 4vw, 1rem) !important;
                 line-height: 1.5;
+                margin-bottom: 1.25rem;
+                padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                text-align: center;
             }
             
             .hero-content {
-                padding: 1rem 0.5rem;
+                padding: clamp(0.5rem, 3vw, 1rem) clamp(0.25rem, 2vw, 0.5rem);
                 margin: 0 auto;
                 max-width: 100%;
-            }
-            
-            .hero h1 {
-                font-size: 1.6rem !important;
-                line-height: 1.3;
-                margin-bottom: 0.75rem;
-                word-break: normal;
-                overflow-wrap: break-word;
-                hyphens: auto;
-                padding: 0 0.25rem;
-            }
-            
-            .hero p {
-                font-size: 0.9rem !important;
-                line-height: 1.6;
-                margin-bottom: 1.25rem;
-                padding: 0 0.25rem;
+                width: 100%;
+                box-sizing: border-box;
             }
             
             .hero-buttons {
                 flex-direction: column;
                 gap: 0.75rem;
-                padding: 0 0.25rem;
+                padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
             }
             
             .btn {
                 width: 100%;
-                max-width: 260px;
-                padding: 0.9rem 1rem;
+                max-width: 280px;
+                padding: clamp(0.75rem, 4vw, 0.9rem) clamp(1rem, 4vw, 1.1rem);
                 min-height: 44px;
-                font-size: 0.85rem;
+                font-size: clamp(0.75rem, 3.5vw, 0.85rem);
                 margin: 0 auto;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .container {
-                padding: 0 0.5rem;
+                padding: 0 clamp(0.5rem, 3vw, 1rem);
                 max-width: 100%;
+                box-sizing: border-box;
             }
             
             .section-title {
-                font-size: 1.5rem !important;
+                font-size: clamp(1.2rem, 5.5vw, 1.6rem) !important;
                 line-height: 1.3;
-                padding: 0 0.25rem;
+                padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
             }
             
             .section-subtitle {
-                font-size: 0.9rem !important;
+                font-size: clamp(0.8rem, 4vw, 1rem) !important;
                 line-height: 1.6;
-                padding: 0 0.25rem;
+                padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                text-align: center;
             }
             
             .hero-stats {
                 grid-template-columns: 1fr;
                 gap: 0.75rem;
                 margin: 1.5rem 0;
-                padding: 0 0.25rem;
+                padding: 0 clamp(0.25rem, 2vw, 0.5rem);
             }
             
             .stat-card {
-                padding: 1rem;
+                padding: clamp(0.75rem, 4vw, 1rem);
                 min-height: auto;
             }
             
             .stat-number {
-                font-size: 1.5rem;
+                font-size: clamp(1.1rem, 5vw, 1.5rem);
+                word-break: break-word;
             }
             
             .stat-label {
-                font-size: 0.8rem;
+                font-size: clamp(0.7rem, 3vw, 0.8rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .hero-indicators {
@@ -1475,80 +1668,325 @@
             }
             
             .methodology-step {
-                padding: 0.75rem;
+                padding: clamp(0.75rem, 3vw, 1rem);
             }
             
             .testimonial-card {
-                padding: 1.25rem;
+                padding: clamp(1rem, 4vw, 1.25rem);
                 margin-bottom: 1rem;
             }
-        }
-        
-        /* Extra small screens */
-        @media (max-width: 360px) {
-            .hero h1 {
-                font-size: clamp(1rem, 3.2vw, 1.4rem) !important;
-                line-height: 1.1;
-                margin-bottom: 0.6rem;
-                padding: 0 0.125rem;
+            
+            .card {
+                padding: clamp(1rem, 4vw, 1.25rem);
+                margin-bottom: 1rem;
             }
             
-            .hero p {
-                font-size: clamp(0.75rem, 2.8vw, 0.85rem) !important;
+            .card h3, .card h4, .feature-card h4 {
+                font-size: clamp(1rem, 4.5vw, 1.2rem) !important;
                 line-height: 1.3;
-                margin-bottom: 1rem;
-                padding: 0 0.125rem;
+                margin-bottom: 0.75rem;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
             }
             
-            .hero-content {
-                padding: 0.25rem 0.125rem;
-                width: calc(100vw - 0.25rem);
+            .card p, .feature-card p {
+                font-size: clamp(0.8rem, 3.5vw, 0.9rem) !important;
+                line-height: 1.6;
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
-            .section-title {
-                font-size: 1.4rem !important;
-            }
-            
-            .container {
-                padding: 0 0.5rem;
+            .nav-container {
+                padding: clamp(0.4rem, 2vw, 0.5rem) 0;
+                min-height: 60px;
+                gap: clamp(0.25rem, 2vw, 0.5rem);
             }
             
             .logo-img {
-                width: 2.2rem;
-                height: 2.2rem;
+                width: clamp(2.2rem, 7vw, 2.5rem);
+                height: clamp(2.2rem, 7vw, 2.5rem);
             }
             
             .logo-text h1 {
-                font-size: 0.85rem;
+                font-size: clamp(0.8rem, 3.5vw, 1rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .logo-text p {
+                font-size: clamp(0.65rem, 2.5vw, 0.75rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
             
             .nav-actions {
-                gap: 0.2rem;
+                gap: clamp(0.2rem, 1.5vw, 0.4rem);
             }
             
             .language-switcher {
-                padding: 0.3rem 0.5rem;
-                font-size: 0.7rem;
+                padding: clamp(0.3rem, 2vw, 0.4rem) clamp(0.5rem, 2.5vw, 0.6rem);
+                font-size: clamp(0.65rem, 2.5vw, 0.7rem);
+                min-height: 40px;
             }
             
             .apply-btn-main {
-                padding: 0.4rem 0.6rem !important;
-                font-size: 0.7rem !important;
+                padding: clamp(0.4rem, 2vw, 0.5rem) clamp(0.6rem, 2.5vw, 0.75rem) !important;
+                font-size: clamp(0.65rem, 2.5vw, 0.7rem) !important;
+                min-height: 40px !important;
+            }
+            
+            .mobile-menu-btn {
+                min-height: 40px;
+                min-width: 40px;
+                font-size: clamp(0.9rem, 3vw, 1rem);
+                padding: 0.4rem;
+            }
+            
+            .form-input, .form-textarea {
+                font-size: 16px !important;
+                min-height: 44px;
+                padding: clamp(0.6rem, 3vw, 0.75rem) clamp(0.8rem, 3vw, 1rem);
+            }
+        }
+        
+        /* Extra small screens - Ensuring no text cut-off */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: clamp(1rem, 5.5vw, 1.4rem) !important;
+                line-height: 1.2;
+                margin-bottom: 0.6rem;
+                padding: 0 clamp(0.125rem, 1.5vw, 0.25rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
+            }
+            
+            .hero p {
+                font-size: clamp(0.75rem, 4.5vw, 0.9rem) !important;
+                line-height: 1.4;
+                margin-bottom: 1rem;
+                padding: 0 clamp(0.125rem, 1.5vw, 0.25rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding: clamp(0.25rem, 2vw, 0.5rem) clamp(0.125rem, 1.5vw, 0.25rem);
+                width: 100%;
+                margin: 0 auto;
+                box-sizing: border-box;
+            }
+            
+            .section-title {
+                font-size: clamp(1.1rem, 6vw, 1.4rem) !important;
+                padding: 0 clamp(0.125rem, 1.5vw, 0.25rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
+            }
+            
+            .section-subtitle {
+                font-size: clamp(0.75rem, 4vw, 0.9rem) !important;
+                padding: 0 clamp(0.125rem, 1.5vw, 0.25rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+                text-align: center;
+            }
+            
+            .container {
+                padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .logo-img {
+                width: clamp(2rem, 8vw, 2.2rem);
+                height: clamp(2rem, 8vw, 2.2rem);
+            }
+            
+            .logo-text h1 {
+                font-size: clamp(0.7rem, 4vw, 0.85rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .logo-text p {
+                font-size: clamp(0.6rem, 3vw, 0.7rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .nav-actions {
+                gap: clamp(0.1rem, 1vw, 0.2rem);
+            }
+            
+            .language-switcher {
+                padding: clamp(0.2rem, 2vw, 0.3rem) clamp(0.4rem, 2vw, 0.5rem);
+                font-size: clamp(0.6rem, 3vw, 0.7rem);
+                min-height: 36px;
+            }
+            
+            .apply-btn-main {
+                padding: clamp(0.3rem, 2vw, 0.4rem) clamp(0.5rem, 2vw, 0.6rem) !important;
+                font-size: clamp(0.6rem, 3vw, 0.7rem) !important;
+                min-height: 36px !important;
             }
             
             .mobile-menu-btn {
                 min-height: 36px;
                 min-width: 36px;
-                font-size: 1rem;
+                font-size: clamp(0.8rem, 3.5vw, 1rem);
+                padding: 0.3rem;
             }
             
             .btn {
-                font-size: 0.8rem;
-                padding: 0.75rem 1rem;
+                font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+                padding: clamp(0.6rem, 3vw, 0.75rem) clamp(0.8rem, 3vw, 1rem);
+                min-height: 40px;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 260px;
+                margin: 0 auto;
             }
             
             .card {
-                padding: 1rem;
+                padding: clamp(0.75rem, 4vw, 1rem);
+                margin-bottom: 0.75rem;
+            }
+            
+            .card h3, .card h4, .feature-card h4 {
+                font-size: clamp(0.9rem, 4.5vw, 1.1rem) !important;
+                line-height: 1.3;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            .card p, .feature-card p {
+                font-size: clamp(0.75rem, 3.5vw, 0.85rem) !important;
+                line-height: 1.6;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .stat-card {
+                padding: clamp(0.6rem, 3vw, 0.8rem);
+            }
+            
+            .stat-number {
+                font-size: clamp(1rem, 5vw, 1.3rem);
+                word-break: break-word;
+            }
+            
+            .stat-label {
+                font-size: clamp(0.65rem, 3vw, 0.75rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .hero-buttons {
+                gap: 0.5rem;
+                padding: 0 clamp(0.125rem, 1.5vw, 0.25rem);
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .form-input, .form-textarea {
+                font-size: 16px !important;
+                padding: clamp(0.5rem, 3vw, 0.6rem) clamp(0.7rem, 3vw, 0.8rem);
+                min-height: 40px;
+            }
+            
+            .footer-section h4 {
+                font-size: clamp(0.9rem, 4vw, 1.1rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .footer-section a, .footer-section li {
+                font-size: clamp(0.75rem, 3vw, 0.85rem);
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .whatsapp-float {
+                width: clamp(2.5rem, 10vw, 3rem);
+                height: clamp(2.5rem, 10vw, 3rem);
+                font-size: clamp(1rem, 4vw, 1.2rem);
+                bottom: clamp(1rem, 4vw, 1.5rem);
+                right: clamp(1rem, 4vw, 1.5rem);
+            }
+        }
+        
+        /* Ultra small screens - Prevent any text overflow */
+        @media (max-width: 320px) {
+            .hero h1 {
+                font-size: clamp(0.9rem, 6vw, 1.2rem) !important;
+                line-height: 1.1;
+                padding: 0 0.1rem;
+            }
+            
+            .hero p {
+                font-size: clamp(0.7rem, 5vw, 0.85rem) !important;
+                line-height: 1.3;
+                padding: 0 0.1rem;
+            }
+            
+            .section-title {
+                font-size: clamp(1rem, 6.5vw, 1.3rem) !important;
+                padding: 0 0.1rem;
+            }
+            
+            .section-subtitle {
+                font-size: clamp(0.7rem, 4.5vw, 0.85rem) !important;
+                padding: 0 0.1rem;
+            }
+            
+            .container {
+                padding: 0 0.25rem;
+            }
+            
+            .nav-container {
+                min-height: 56px;
+                padding: 0.3rem 0;
+            }
+            
+            .logo-img {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+            
+            .logo-text h1 {
+                font-size: clamp(0.6rem, 4.5vw, 0.75rem);
+            }
+            
+            .logo-text p {
+                font-size: clamp(0.55rem, 3.5vw, 0.65rem);
+            }
+            
+            .btn {
+                font-size: clamp(0.65rem, 4vw, 0.75rem);
+                padding: 0.5rem 0.75rem;
+                min-height: 38px;
+                max-width: 240px;
+            }
+            
+            .card {
+                padding: clamp(0.6rem, 4vw, 0.8rem);
+            }
+            
+            .card h3, .card h4 {
+                font-size: clamp(0.85rem, 5vw, 1rem) !important;
+            }
+            
+            .card p {
+                font-size: clamp(0.7rem, 4vw, 0.8rem) !important;
             }
         }
         
@@ -2947,6 +3385,24 @@
                         </button>
                             <div class="donate-dropdown" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; border-radius: 0.5rem; box-shadow: var(--shadow-card); border: 1px solid hsl(var(--border)); z-index: 100; margin-top: 0.5rem; overflow: hidden; display: none; min-width: 400px; max-width: 500px;">
                             
+                            <!-- HeptaPay International Payment Section -->
+                            <div style="padding: 1rem; border-bottom: 1px solid hsl(var(--border));">
+                                <h4 style="font-weight: bold; margin-bottom: 0.5rem; color: hsl(var(--primary)); font-size: 0.9rem;">🌍 International Payment (HeptaPay)</h4>
+                                <p style="font-size: 0.75rem; color: hsl(var(--muted-foreground)); margin-bottom: 1rem;">Pay from anywhere in the world using your credit/debit card</p>
+                                
+                <!-- HeptaPay Payment Form -->
+                <div class='heptapaycontainer' style="margin-bottom: 1rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <input type="number" id="receivedAmount" class="txtAmount" step="1" autoComplete="off" placeholder="Amount (RWF)" value="50000" style="padding: 0.5rem; border: 1px solid hsl(var(--border)); border-radius: 0.375rem; font-size: 0.75rem;" />
+                        <input type="number" id="sendAmount" class="txtAmount" step=".01" min="1" max="500" autoComplete="off" placeholder="Amount (USD)" style="padding: 0.5rem; border: 1px solid hsl(var(--border)); border-radius: 0.375rem; font-size: 0.75rem;" />
+                    </div>
+                    <input type="hidden" id="note" value="LTH-Education-Donation" />
+                    <input type="hidden" id="payerEmail" value="" />
+                    <span class="hpayres" style="display: block; margin-bottom: 0.5rem; font-size: 0.75rem;"></span>
+                    <input id="heptapaybtn" type="button" class='btn btn-primary' value="💳 Donate with HeptaPay" onclick="initiateHeptaPayment()" style="width: 100%; font-size: 0.75rem; padding: 0.5rem;" />
+                </div>
+                            </div>
+
                             <!-- Bank Transfer -->
                             <div style="padding: 1rem; border-bottom: 1px solid hsl(var(--border));">
                                 <h4 style="font-weight: bold; margin-bottom: 0.5rem; color: hsl(var(--primary)); font-size: 0.9rem;">💳 Bank Transfer</h4>
@@ -2994,6 +3450,11 @@
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
         </svg>
     </a>
+
+    <!-- HeptaPay Integration Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://ap-gateway.mastercard.com/checkout/version/62/checkout.js" data-error="errorCallback" data-cancel="cancelCallback" data-complete="completeCallback"></script>
+    <script id="hpayPlugin" data-env="dev" data-country="rw" data-phone="0782407285" data-service="Pay" data-account="" data-callback="https://lth-school-4dii.vercel.app/heptapay-callback" src="https://heptapay.com/static/js/plugin.paypal.hp.js?v=4.0"></script>
 
     <script>
         // Hero Slider Functions
@@ -3923,41 +4384,77 @@
         </div>
     </div>
 
-    <!-- HeptaPay Integration Script -->
-    <script src="https://heptapay.com/pay/v1/js/heptapay.js"></script>
+    <!-- HeptaPay Integration Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://ap-gateway.mastercard.com/checkout/version/62/checkout.js" data-error="errorCallback" data-cancel="cancelCallback" data-complete="completeCallback"></script>
+    <script id="hpayPlugin" data-env="dev" data-country="rw" data-phone="0782407285" data-service="Pay" data-account="" data-callback="https://lth-school-4dii.vercel.app/heptapay-callback" src="https://heptapay.com/static/js/plugin.paypal.hp.js?v=4.0"></script>
+    
     <script>
-        function pay() {
+        // HeptaPay Integration Function
+        function initiateHeptaPayment() {
             const receivedAmount = document.getElementById('receivedAmount').value;
             const sendAmount = document.getElementById('sendAmount').value;
             const note = document.getElementById('note').value;
             const payerEmail = document.getElementById('payerEmail').value;
             
             if (!receivedAmount && !sendAmount) {
-                alert('Please enter an amount to donate.');
+                document.querySelector('.hpayres').innerHTML = '<span style="color: red;">Please enter an amount to donate.</span>';
                 return;
             }
             
-            // Initialize HeptaPay payment
-            const paymentData = {
-                amount: receivedAmount || (sendAmount * 1000), // Convert USD to RWF approximate rate
-                currency: 'RWF',
-                description: 'Donation to Loyal Training Hub - Support Education',
-                customer_email: payerEmail || 'donor@lth.ac.rw',
-                reference: 'LTH-DONATE-' + Date.now()
-            };
-            
             // Show payment processing message
-            document.querySelector('.hpayres').innerHTML = '<span style="color: hsl(var(--primary));">Processing payment...</span>';
+            document.querySelector('.hpayres').innerHTML = '<span style="color: hsl(var(--primary));">Redirecting to HeptaPay...</span>';
             
-            // This would integrate with HeptaPay API - placeholder for now
-            setTimeout(() => {
-                document.querySelector('.hpayres').innerHTML = '<span style="color: green;">✓ Thank you for your donation! Visit <a href="https://heptapay.com/" target="_blank" style="color: hsl(var(--primary));">heptapay.com</a> for more info.</span>';
-            }, 2000);
+            // Disable the button to prevent multiple clicks
+            document.getElementById('heptapaybtn').disabled = true;
+            document.getElementById('heptapaybtn').value = 'Processing...';
+            
+            try {
+                // Create HeptaPay payment URL
+                const amount = receivedAmount || (sendAmount * 1300); // Convert USD to RWF if needed
+                const heptaPayUrl = `https://heptapay.com/rw/?amount=${amount}&email=${payerEmail}&note=${note}&recipient=0782407285&country=rw`;
+                
+                // Open HeptaPay in new window
+                window.open(heptaPayUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    document.querySelector('.hpayres').innerHTML = '<span style="color: green;">Payment window opened. Complete payment in the new tab.</span>';
+                    document.getElementById('heptapaybtn').disabled = false;
+                    document.getElementById('heptapaybtn').value = '💳 Donate with HeptaPay';
+                }, 2000);
+                
+            } catch (error) {
+                document.querySelector('.hpayres').innerHTML = '<span style="color: red;">Payment initialization failed. Please try again.</span>';
+                document.getElementById('heptapaybtn').disabled = false;
+                document.getElementById('heptapaybtn').value = '💳 Donate with HeptaPay';
+            }
+        }
+
+        // HeptaPay Callback Functions (Required by Mastercard Gateway)
+        function completeCallback(resultIndicator, sessionVersion) {
+            document.querySelector('.hpayres').innerHTML = '<span style="color: green;">✓ Payment completed successfully! Thank you for supporting education at Loyal Training Hub.</span>';
+            document.getElementById('heptapaybtn').disabled = false;
+            document.getElementById('heptapaybtn').value = '💳 Pay with HeptaPay';
+            console.log('Payment completed:', resultIndicator, sessionVersion);
+        }
+
+        function errorCallback(error) {
+            document.querySelector('.hpayres').innerHTML = '<span style="color: red;">❌ Payment error occurred. Please try again or use alternative payment methods below.</span>';
+            document.getElementById('heptapaybtn').disabled = false;
+            document.getElementById('heptapaybtn').value = '💳 Pay with HeptaPay';
+            console.error('Payment error:', error);
+        }
+
+        function cancelCallback() {
+            document.querySelector('.hpayres').innerHTML = '<span style="color: orange;">⚠️ Payment was cancelled by user.</span>';
+            document.getElementById('heptapaybtn').disabled = false;
+            document.getElementById('heptapaybtn').value = '💳 Pay with HeptaPay';
+            console.log('Payment cancelled by user');
         }
     </script>
 </body>
 </html>
-
 
 
 
