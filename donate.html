@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Support Education - Donate to Loyal Training Hub</title>
     <meta name="description" content="Support quality education at Loyal Training Hub. Your donation helps provide training opportunities to students and builds a brighter future.">
     
@@ -116,18 +117,19 @@
             text-decoration: none;
             color: white;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.1);
+            background: hsl(var(--primary));
             padding: 0.75rem 1.5rem;
             border-radius: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: none;
             transition: var(--transition-smooth);
             z-index: 10;
+            box-shadow: var(--shadow-card);
         }
         
         .back-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-2px);
+            background: hsl(var(--primary-glow));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-premium);
         }
         
         .main {
@@ -451,6 +453,163 @@
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
+
+        .btnPay-popup {
+            background: hsl(var(--primary));
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            width: 100%;
+        }
+
+        .btnPay-popup:hover {
+            background-color: hsl(var(--primary-glow));
+            transform: translateY(-2px);
+        }
+
+        /* Styles for the Guided Handoff Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: hsl(var(--foreground));
+        }
+
+        .modal-content p {
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 2rem;
+        }
+
+        .modal-details {
+            background-color: #f7f9fc;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .modal-detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-detail-item span {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .modal-detail-item strong {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+        }
+        
+        .modal-copy-btn {
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        
+        .modal-copy-btn:hover {
+            background-color: #eee;
+        }
+
+        .modal-loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid hsl(var(--primary));
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .modal-actions button {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            border: none;
+        }
+
+        .btn-proceed {
+            background: hsl(var(--primary));
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn-proceed:hover {
+            background-color: hsl(var(--primary-glow));
+        }
+
+        .btn-cancel {
+            background: none;
+            color: hsl(var(--muted-foreground));
+            border: 1px solid #ccc;
+        }
+
+        .btn-cancel:hover {
+            background: #f0f0f0;
+        }
+
     </style>
 </head>
 <body>
@@ -534,9 +693,46 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- HeptaPay International Payment Method -->
+                <div class="donation-card">
+                    <h3>💳 HeptaPay - International Donors</h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem;">
+                        Pay securely with your credit/debit card from anywhere in the world.
+                    </p>
+                    
+                    <button class="btnPay-popup" id="openHeptaPayModal">Pay with HeptaPay</button>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- Guided Handoff Modal -->
+    <div id="heptapayModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Securely Connecting to HeptaPay</h3>
+            <p>You will be redirected to our trusted payment partner to complete your donation.</p>
+            <div class="modal-loader"></div>
+            <div class="modal-details">
+                <p>Please confirm these details on the HeptaPay page:</p>
+                <div class="modal-detail-item">
+                    <span>Recipient's Number:</span>
+                    <div>
+                        <strong id="modalPhoneNumber">0782407285</strong>
+                        <button id="modalCopyBtn" class="modal-copy-btn">Copy</button>
+                    </div>
+                </div>
+                <div class="modal-detail-item">
+                    <span>Service:</span>
+                    <strong>MTN MoMo</strong>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="proceedToHeptaPay" class="btn-proceed">Proceed to Payment</button>
+                <button id="cancelHeptaPay" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <section class="impact-section">
         <div class="container">
@@ -612,8 +808,9 @@
             </div>
         </div>
     </section>
-
+    
     <script>
+        // Standard page functions
         function copyToClipboard(text, message = 'Copied to clipboard!') {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(function() {
@@ -681,6 +878,46 @@
                 }
             });
         });
+
+        // Guided Handoff Modal Logic
+        const openModalBtn = document.getElementById('openHeptaPayModal');
+        const modal = document.getElementById('heptapayModal');
+        const proceedBtn = document.getElementById('proceedToHeptaPay');
+        const cancelBtn = document.getElementById('cancelHeptaPay');
+        const modalCopyBtn = document.getElementById('modalCopyBtn');
+        const modalPhoneNumber = document.getElementById('modalPhoneNumber').innerText;
+
+        const heptapayUrl = 'https://heptapay.com/rw/?phone=0782407285&service=MTN%20MoMo';
+
+        function showModal() {
+            modal.classList.add('visible');
+        }
+
+        function hideModal() {
+            modal.classList.remove('visible');
+        }
+
+        openModalBtn.addEventListener('click', showModal);
+
+        proceedBtn.addEventListener('click', () => {
+            window.open(heptapayUrl, '_blank');
+            hideModal();
+        });
+
+        cancelBtn.addEventListener('click', hideModal);
+
+        // Close modal if user clicks on the overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideModal();
+            }
+        });
+        
+        modalCopyBtn.addEventListener('click', () => {
+            copyToClipboard(modalPhoneNumber, 'Phone number copied!');
+        });
+
     </script>
 </body>
 </html>
+
