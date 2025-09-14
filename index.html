@@ -7,13 +7,11 @@
     <meta name="description" content="Leading educational institution in Rwanda offering IT and Language training programs. Master new skills with expert instructors and hands-on learning.">
     <meta name="keywords" content="education, training, IT courses, language learning, Rwanda, programming, web development, data science">
     
-    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Loyal Training Hub - Empowering Futures Through Practical Education">
     <meta property="og:description" content="Leading educational institution in Rwanda offering IT and Language training programs">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://i.imgur.com/uLLa9dm.png">
     
-    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Loyal Training Hub - Empowering Futures Through Practical Education">
     <meta name="twitter:description" content="Leading educational institution in Rwanda offering IT and Language training programs">
@@ -404,18 +402,18 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(198, 124, 31, 0.2);
+            border: 1px solid rgba(198, 124, 31, 0.3);
             border-radius: 0.5rem;
             cursor: pointer;
             transition: var(--transition-smooth);
             font-weight: 500;
-            color: white;
+            color: #C67C1F;
             text-decoration: none;
         }
 
         .language-switcher:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(198, 124, 31, 0.3);
             transform: translateY(-1px);
         }
 
@@ -509,16 +507,16 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 1rem;
+            gap: 0.4rem; /* Adjusted spacing */
             z-index: 10;
         }
         
         .hero-indicator {
-            width: 6px;
-            height: 6px;
+            width: 5px; /* Corrected size */
+            height: 5px; /* Corrected size */
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.5);
+            /* border removed for cleaner look */
             cursor: pointer;
             transition: var(--transition-smooth);
         }
@@ -526,6 +524,7 @@
         .hero-indicator.active {
             background: white;
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
         }
         
         .hero::before {
@@ -1516,12 +1515,6 @@
             
             .hero-indicators {
                 bottom: 1rem;
-                gap: 0.3rem;
-            }
-            
-            .hero-indicator {
-                width: 5px;
-                height: 5px;
             }
             
             .nav-container {
@@ -1659,12 +1652,6 @@
             
             .hero-indicators {
                 bottom: 0.75rem;
-                gap: 0.25rem;
-            }
-            
-            .hero-indicator {
-                width: 4px;
-                height: 4px;
             }
             
             .methodology-step {
@@ -2519,6 +2506,30 @@
                     <div style="text-align: center; margin-top: 2rem;">
                         <a href="#application" class="btn btn-primary" style="font-size: 1.1rem; padding: 0.875rem 1.75rem; animation: pulse-glow 2s infinite;"><span data-translate="applyNow">🎓 Apply Now</span></a>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Vision and Mission Section -->
+            <div class="grid grid-2" style="gap: 2rem; margin-top: 4rem;">
+                <div class="card animate-on-scroll">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: hsl(var(--primary));">
+                        <span style="margin-right: 0.5rem;">🎯</span>Vision Statement
+                    </h3>
+                    <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+                        We are dedicated to empowering students maximize their skills, knowledge and their potential in order to participate in and to the global society.
+                    </p>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">
+                        Our students are critical thinkers, lifelong learners who are also empowered to meet current and future challenges to develop social awareness, civic responsibility, and personal growth.
+                    </p>
+                </div>
+
+                <div class="card animate-on-scroll">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: hsl(var(--primary));">
+                        <span style="margin-right: 0.5rem;">🚀</span>Mission Statement
+                    </h3>
+                    <p style="color: hsl(var(--muted-foreground)); line-height: 1.6;">
+                        Our mission is to deliver a high standard training practice that empowers, encourages, inspires each student to become successful, to discover their potential and be productive members who have the tools necessary for success in a changing world.
+                    </p>
                 </div>
             </div>
             
@@ -3705,9 +3716,9 @@
                 foundationalDesc: 'We start with strong theoretical basics, ensuring every student understands the core concepts before diving into practical applications.',
                 handsOnTraining: 'Hands-On Practical Training',
                 handsOnDesc: 'Our courses emphasize active learning through real-world projects, coding challenges, and case studies, building practical skills.',
-                personalizedMentorship: 'Personalized Mentorship',
+                personalizedMentorship: 'Expert Mentorship & Feedback',
                 mentorshipDesc: 'Students receive personalized guidance from industry experts, with regular feedback sessions to refine their skills and understanding.',
-                careerPreparation: 'Career Preparation',
+                careerPreparation: 'Career Development & Support',
                 careerDesc: 'We provide robust career services, including resume building, interview preparation, and job placement assistance, ensuring a smooth transition into the workforce.',
                 readyLearningJourney: 'Ready to Start Your Learning Journey?',
                 experienceMethodology: 'Experience our unique methodology and transform your career with hands-on, practical education.',
@@ -3784,8 +3795,8 @@
                 
                 // Contact & Footer
                 readyToStart: 'Ready to Start Your Learning Journey?',
-                contactUs: 'Contact us today and let\'s discuss your goals!',
-                whatsappUs: 'WhatsApp Us Now',
+                contactUs: 'Transform your career with our hands-on training programs!',
+                whatsappUs: 'WhatsApp Us',
                 backToTop: '⬆️ Back to Top',
                 allRightsReserved: '© 2024 Loyal Training Hub Ltd. All rights reserved.',
                 madeWith: 'Made with ❤️ by Ibrix digital',
@@ -3943,9 +3954,9 @@
                 foundationalDesc: 'Nous commençons par des bases théoriques solides, en nous assurant que chaque étudiant comprend les concepts fondamentaux avant de plonger dans les applications pratiques.',
                 handsOnTraining: 'Formation Pratique',
                 handsOnDesc: 'Nos cours mettent l\'accent sur l\'apprentissage actif à travers des projets du monde réel, des défis de codage et des études de cas, développant des compétences pratiques.',
-                personalizedMentorship: 'Mentorat Personnalisé',
+                personalizedMentorship: 'Mentorat Expert et Feedback',
                 mentorshipDesc: 'Les étudiants reçoivent des conseils personnalisés d\'experts de l\'industrie, avec des sessions de feedback régulières pour affiner leurs compétences et leur compréhension.',
-                careerPreparation: 'Préparation de Carrière',
+                careerPreparation: 'Développement de Carrière et Support',
                 careerDesc: 'Nous fournissons des services de carrière robustes, y compris la rédaction de CV, la préparation d\'entretiens et l\'assistance au placement d\'emploi, assurant une transition en douceur vers le marché du travail.',
                 readyLearningJourney: 'Prêt à Commencer Votre Parcours d\'Apprentissage?',
                 experienceMethodology: 'Découvrez notre méthodologie unique et transformez votre carrière avec une éducation pratique et concrète.',
@@ -4027,8 +4038,8 @@
                 
                 // Contact & Footer
                 readyToStart: 'Prêt à Commencer Votre Parcours d\'Apprentissage?',
-                contactUs: 'Contactez-nous aujourd\'hui et discutons de vos objectifs!',
-                whatsappUs: 'WhatsApp Maintenant',
+                contactUs: 'Transformez votre carrière avec nos programmes de formation pratiques!',
+                whatsappUs: 'WhatsApp Nous',
                 backToTop: '⬆️ Retour en Haut',
                 allRightsReserved: '© 2024 Loyal Training Hub Ltd. Tous droits réservés.',
                 madeWith: 'Fait avec ❤️ par Ibrix digital',
@@ -4179,7 +4190,7 @@
                         <p>Language proficiency opens doors to international opportunities, higher salaries, and global career advancement.</p>
                     </div>
                 `;
-            } else if (courseType === 'it') {
+            } else if (courseType === 'ict') {
                 content = `
                     <h2 style="color: hsl(var(--primary)); margin-bottom: 1.5rem;">💻 IT Department - Detailed Information</h2>
                     
@@ -4372,6 +4383,3 @@
     </script>
 </body>
 </html>
-
-
-
