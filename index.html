@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -402,18 +402,18 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background: rgba(198, 124, 31, 0.2);
-            border: 1px solid rgba(198, 124, 31, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 0.5rem;
             cursor: pointer;
             transition: var(--transition-smooth);
-            font-weight: 500;
-            color: #C67C1F;
+            font-weight: 600; /* Bolder for visibility */
+            color: hsl(var(--primary)); /* Changed from white for visibility */
             text-decoration: none;
         }
 
         .language-switcher:hover {
-            background: rgba(198, 124, 31, 0.3);
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
         }
 
@@ -501,32 +501,37 @@
             right: 2rem;
         }
         
-        .hero-indicators {
+        /* Mobile Hero Navigation */
+        .hero-mobile-nav {
+            display: none; /* Hidden by default */
             position: absolute;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            gap: 0.4rem; /* Adjusted spacing */
             z-index: 10;
+            gap: 1rem;
         }
-        
-        .hero-indicator {
-            width: 5px; /* Corrected size */
-            height: 5px; /* Corrected size */
+
+        .hero-mobile-nav button {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            /* border removed for cleaner look */
             cursor: pointer;
             transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
-        
-        .hero-indicator.active {
-            background: white;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-            transform: scale(1.2);
+
+        .hero-mobile-nav button:hover {
+            background: rgba(0, 0, 0, 0.4);
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -1513,10 +1518,10 @@
                 display: none;
             }
             
-            .hero-indicators {
-                bottom: 1rem;
+            .hero-mobile-nav {
+                display: flex; /* Show mobile nav */
             }
-            
+
             .nav-container {
                 padding: 0.5rem 0;
                 min-height: 64px;
@@ -1649,11 +1654,7 @@
                 word-break: break-word;
                 overflow-wrap: break-word;
             }
-            
-            .hero-indicators {
-                bottom: 0.75rem;
-            }
-            
+
             .methodology-step {
                 padding: clamp(0.75rem, 3vw, 1rem);
             }
